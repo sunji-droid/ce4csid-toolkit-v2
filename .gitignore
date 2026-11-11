@@ -1,0 +1,13 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
+
+# Dependencies (none required, but kept for safety)
+node_modules/
+
+# Python cache (tools/)
+__pycache__/
+*.pyc

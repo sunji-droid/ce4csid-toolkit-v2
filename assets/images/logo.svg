@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 64" role="img" aria-label="CE4CSID Community Engagement Toolkit">
+  <!-- Placeholder lockup: replace with the official CSID Network logo when supplied.
+       Keep the same filename and the header/footer will pick it up automatically. -->
+  <rect x="4" y="6" width="52" height="52" rx="15" fill="#044953"/>
+  <circle cx="30" cy="32" r="12.5" fill="none" stroke="#EFF4E3" stroke-width="2.2"/>
+  <ellipse cx="30" cy="32" rx="5.5" ry="12.5" fill="none" stroke="#EFF4E3" stroke-width="1.6"/>
+  <path d="M17.5 32h25" stroke="#EFF4E3" stroke-width="1.6"/>
+  <circle cx="40.5" cy="21.5" r="4.6" fill="#D3F781"/>
+  <text x="70" y="34" font-family="Inter Tight, Inter, system-ui, sans-serif" font-size="26" font-weight="700" letter-spacing="-0.5" fill="#044953">CE4CSID</text>
+  <text x="70" y="52" font-family="Inter, system-ui, sans-serif" font-size="11.5" font-weight="500" letter-spacing="0.4" fill="#044953" opacity="0.75">Community Engagement Toolkit</text>
+</svg>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sunji-droid.github.io/ce4csid-toolkit-v2/sitemap.xml
