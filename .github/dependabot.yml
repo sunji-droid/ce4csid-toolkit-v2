@@ -1,0 +1,30 @@
+version: 2
+updates:
+  # Dev-only tooling (the visitor-facing site has zero runtime dependencies).
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Africa/Gaborone
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: build
+      include: scope
+    labels:
+      - dependencies
+
+  # Keep GitHub Actions pinned majors current.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Africa/Gaborone
+    commit-message:
+      prefix: ci
+      include: scope
+    labels:
+      - dependencies
