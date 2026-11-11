@@ -29,7 +29,13 @@ export function filterDownloads(data, categories, query) {
   if (!q) return data.slice();
   const words = q.split(/\s+/).filter(Boolean);
   return data.filter((res) => {
-    const hay = (res.title + " " + getCategory(categories, res.category).title + " " + res.type).toLowerCase();
+    const hay = (
+      res.title +
+      " " +
+      getCategory(categories, res.category).title +
+      " " +
+      res.type
+    ).toLowerCase();
     return words.every((w) => hay.includes(w));
   });
 }
@@ -52,11 +58,25 @@ export function buildDownloadsRowsHTML(rows, categories) {
       const cat = getCategory(categories, res.category);
       return (
         "<tr>" +
-          '<td class="dl-title">' + esc(res.title) + "</td>" +
-          '<td class="dl-soft"><span class="dl-cat-dot" style="background:' + (COLOR_VAR[cat.color] || COLOR_VAR.lime) + '"></span>' + esc(cat.title) + "</td>" +
-          '<td class="dl-soft">' + esc(res.type) + "</td>" +
-          '<td class="dl-soft">' + esc(res.size) + "</td>" +
-          '<td><a class="btn btn-ghost btn-sm" href="' + esc(res.file) + '" download aria-label="Download ' + esc(res.title) + '">Download</a></td>' +
+        '<td class="dl-title">' +
+        esc(res.title) +
+        "</td>" +
+        '<td class="dl-soft"><span class="dl-cat-dot" style="background:' +
+        (COLOR_VAR[cat.color] || COLOR_VAR.lime) +
+        '"></span>' +
+        esc(cat.title) +
+        "</td>" +
+        '<td class="dl-soft">' +
+        esc(res.type) +
+        "</td>" +
+        '<td class="dl-soft">' +
+        esc(res.size) +
+        "</td>" +
+        '<td><a class="btn btn-ghost btn-sm" href="' +
+        esc(res.file) +
+        '" download aria-label="Download ' +
+        esc(res.title) +
+        '">Download</a></td>' +
         "</tr>"
       );
     })
@@ -71,10 +91,12 @@ export function initDownloads() {
   const tbody = document.getElementById("downloads-tbody");
   if (!tbody) return;
   const countEl = document.getElementById("downloads-count");
-  const input = /** @type {HTMLInputElement | null} */ (document.getElementById("downloads-search"));
+  const input = /** @type {HTMLInputElement | null} */ (
+    document.getElementById("downloads-search")
+  );
 
   /** @param {string} query */
-  function render(query) {
+  const render = (query) => {
     const rows = filterDownloads(RESOURCES, CATEGORIES, query);
     if (countEl) {
       countEl.textContent = query.trim()
@@ -82,7 +104,7 @@ export function initDownloads() {
         : "All " + RESOURCES.length + " toolkit files";
     }
     tbody.innerHTML = buildDownloadsRowsHTML(rows, CATEGORIES);
-  }
+  };
 
   render("");
   if (input) {

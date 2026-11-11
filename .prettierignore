@@ -1,0 +1,12 @@
+# Generated / binary / vendored — not hand-formatted
+node_modules/
+coverage/
+downloads/
+assets/fonts/
+assets/images/
+*.html
+package-lock.json
+*.zip
+*.png
+*.jpg
+*.woff2

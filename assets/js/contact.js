@@ -30,15 +30,26 @@ const CONTACT_EMAIL = "contactus@bshdngo.org";
 export function buildMailto(fields, contactEmail = CONTACT_EMAIL) {
   const subject = "[CE4CSID Toolkit] " + (fields.reason || "General question");
   const body =
-    "Name: " + fields.name + "\n" +
-    "Email: " + fields.email + "\n" +
-    "Organisation: " + (fields.organisation || "—") + "\n" +
-    "Reason: " + fields.reason + "\n\n" +
+    "Name: " +
+    fields.name +
+    "\n" +
+    "Email: " +
+    fields.email +
+    "\n" +
+    "Organisation: " +
+    (fields.organisation || "—") +
+    "\n" +
+    "Reason: " +
+    fields.reason +
+    "\n\n" +
     fields.message;
   return (
-    "mailto:" + contactEmail +
-    "?subject=" + encodeURIComponent(subject) +
-    "&body=" + encodeURIComponent(body)
+    "mailto:" +
+    contactEmail +
+    "?subject=" +
+    encodeURIComponent(subject) +
+    "&body=" +
+    encodeURIComponent(body)
   );
 }
 
@@ -62,9 +73,10 @@ export function readContactFields(form) {
 
 /**
  * Initialise the contact form. Safe to call when the form is absent.
+ * @param {string} [endpoint] Override the configured endpoint (used by tests).
  * @returns {void}
  */
-export function initContactForm() {
+export function initContactForm(endpoint = FORM_ENDPOINT) {
   const form = /** @type {HTMLFormElement | null} */ (document.getElementById("contact-form"));
   if (!form) return;
   const statusEl = document.getElementById("form-status");
@@ -81,10 +93,12 @@ export function initContactForm() {
     evt.preventDefault();
     const fields = readContactFields(form);
 
-    if (!FORM_ENDPOINT) {
+    if (!endpoint) {
       window.location.href = buildMailto(fields);
       setStatus(
-        "Your email app should now open with the message ready to send. If it did not open, email " + CONTACT_EMAIL + " directly.",
+        "Your email app should now open with the message ready to send. If it did not open, email " +
+          CONTACT_EMAIL +
+          " directly.",
         true
       );
       return;
@@ -96,7 +110,7 @@ export function initContactForm() {
     }
     setStatus("", true);
 
-    fetch(FORM_ENDPOINT, {
+    fetch(endpoint, {
       method: "POST",
       body: new FormData(form),
       headers: { Accept: "application/json" },
@@ -104,14 +118,25 @@ export function initContactForm() {
       .then((response) => {
         if (response.ok) {
           form.reset();
-          setStatus("Thank you. Your message has been sent, and BSHD will respond as soon as possible.", true);
+          setStatus(
+            "Thank you. Your message has been sent, and BSHD will respond as soon as possible.",
+            true
+          );
           showToast("Message sent successfully.");
         } else {
-          setStatus("Something went wrong sending your message. Please email " + CONTACT_EMAIL + " directly.", false);
+          setStatus(
+            "Something went wrong sending your message. Please email " +
+              CONTACT_EMAIL +
+              " directly.",
+            false
+          );
         }
       })
       .catch(() => {
-        setStatus("Something went wrong sending your message. Please email " + CONTACT_EMAIL + " directly.", false);
+        setStatus(
+          "Something went wrong sending your message. Please email " + CONTACT_EMAIL + " directly.",
+          false
+        );
       })
       .finally(() => {
         if (submitBtn) {
@@ -122,4 +147,4 @@ export function initContactForm() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", initContactForm);
+document.addEventListener("DOMContentLoaded", () => initContactForm());

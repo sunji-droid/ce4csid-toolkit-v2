@@ -37,8 +37,13 @@ export function matches(res, categories, state) {
   if (state.category !== "all" && res.category !== state.category) return false;
   if (!state.q) return true;
   const hay = (
-    res.title + " " + res.description + " " +
-    getCategory(categories, res.category).title + " " + res.type
+    res.title +
+    " " +
+    res.description +
+    " " +
+    getCategory(categories, res.category).title +
+    " " +
+    res.type
   ).toLowerCase();
   return state.q
     .toLowerCase()
@@ -67,17 +72,41 @@ export function filterResources(data, categories, state) {
 export function resourceCardHTML(res, categories) {
   const cat = getCategory(categories, res.category);
   return (
-    '<article class="resource-card" data-category="' + esc(res.category) + '">' +
-      '<div class="resource-card-top">' +
-        '<span class="resource-cat cat-' + esc(cat.color) + '">' + esc(cat.title) + "</span>" +
-        '<span class="file-badge' + (res.type === "DOCX" ? " badge-docx" : "") + '" aria-label="' + esc(res.type) + ' format">' + esc(res.type) + "</span>" +
-      "</div>" +
-      "<h3>" + esc(res.title) + "</h3>" +
-      '<p class="resource-desc">' + esc(res.description) + "</p>" +
-      '<div class="resource-card-foot">' +
-        '<span class="resource-meta">' + esc(res.type === "DOCX" ? "Word document" : "PDF document") + " · " + esc(res.size) + "</span>" +
-        '<a class="btn btn-ghost btn-sm" href="' + esc(res.file) + '" download aria-label="Download ' + esc(res.title) + '">Download</a>' +
-      "</div>" +
+    '<article class="resource-card" data-category="' +
+    esc(res.category) +
+    '">' +
+    '<div class="resource-card-top">' +
+    '<span class="resource-cat cat-' +
+    esc(cat.color) +
+    '">' +
+    esc(cat.title) +
+    "</span>" +
+    '<span class="file-badge' +
+    (res.type === "DOCX" ? " badge-docx" : "") +
+    '" aria-label="' +
+    esc(res.type) +
+    ' format">' +
+    esc(res.type) +
+    "</span>" +
+    "</div>" +
+    "<h3>" +
+    esc(res.title) +
+    "</h3>" +
+    '<p class="resource-desc">' +
+    esc(res.description) +
+    "</p>" +
+    '<div class="resource-card-foot">' +
+    '<span class="resource-meta">' +
+    esc(res.type === "DOCX" ? "Word document" : "PDF document") +
+    " · " +
+    esc(res.size) +
+    "</span>" +
+    '<a class="btn btn-ghost btn-sm" href="' +
+    esc(res.file) +
+    '" download aria-label="Download ' +
+    esc(res.title) +
+    '">Download</a>' +
+    "</div>" +
     "</article>"
   );
 }
@@ -93,27 +122,45 @@ export function buildResourcesHTML(visible, categories, browsing) {
   if (!visible.length) {
     return (
       '<div class="no-results">' +
-        "<h3>No resources match your search</h3>" +
-        "<p>Try a different word, or clear the filters to browse everything.</p>" +
-        '<button type="button" class="btn btn-primary btn-sm" id="clear-filters">Clear search and filters</button>' +
+      "<h3>No resources match your search</h3>" +
+      "<p>Try a different word, or clear the filters to browse everything.</p>" +
+      '<button type="button" class="btn btn-primary btn-sm" id="clear-filters">Clear search and filters</button>' +
       "</div>"
     );
   }
   if (!browsing) {
-    return '<div class="resource-grid">' + visible.map((r) => resourceCardHTML(r, categories)).join("") + "</div>";
+    return (
+      '<div class="resource-grid">' +
+      visible.map((r) => resourceCardHTML(r, categories)).join("") +
+      "</div>"
+    );
   }
   let html = "";
   for (const cat of categories) {
     const items = visible.filter((r) => r.category === cat.id);
     if (!items.length) continue;
     html +=
-      '<section class="resource-group" id="' + esc(cat.id) + '" aria-labelledby="' + esc(cat.id) + '-heading">' +
-        '<div class="resource-group-head">' +
-          '<h2 id="' + esc(cat.id) + '-heading">' + esc(cat.title) + "</h2>" +
-          '<span class="count">' + items.length + " resources</span>" +
-        "</div>" +
-        '<p class="resource-group-desc">' + esc(cat.description) + "</p>" +
-        '<div class="resource-grid">' + items.map((r) => resourceCardHTML(r, categories)).join("") + "</div>" +
+      '<section class="resource-group" id="' +
+      esc(cat.id) +
+      '" aria-labelledby="' +
+      esc(cat.id) +
+      '-heading">' +
+      '<div class="resource-group-head">' +
+      '<h2 id="' +
+      esc(cat.id) +
+      '-heading">' +
+      esc(cat.title) +
+      "</h2>" +
+      '<span class="count">' +
+      items.length +
+      " resources</span>" +
+      "</div>" +
+      '<p class="resource-group-desc">' +
+      esc(cat.description) +
+      "</p>" +
+      '<div class="resource-grid">' +
+      items.map((r) => resourceCardHTML(r, categories)).join("") +
+      "</div>" +
       "</section>";
   }
   return html;
@@ -141,7 +188,10 @@ export function initResources() {
 
   function syncUI() {
     pills.forEach((pill) => {
-      pill.setAttribute("aria-pressed", pill.getAttribute("data-category") === state.category ? "true" : "false");
+      pill.setAttribute(
+        "aria-pressed",
+        pill.getAttribute("data-category") === state.category ? "true" : "false"
+      );
     });
     if (clear) clear.classList.toggle("is-visible", Boolean(state.q));
     const next = new URLSearchParams();
@@ -155,7 +205,7 @@ export function initResources() {
     }
   }
 
-  function render() {
+  const render = () => {
     const visible = filterResources(RESOURCES, CATEGORIES, state);
     const browsing = !state.q && state.category === "all";
     if (countEl) {
@@ -174,7 +224,7 @@ export function initResources() {
         render();
       });
     }
-  }
+  };
 
   if (input) {
     input.value = state.q;

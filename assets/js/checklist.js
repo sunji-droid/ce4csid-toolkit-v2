@@ -197,12 +197,18 @@ export function buildStage(stage, idx, state, handlers) {
   head.setAttribute("aria-expanded", isOpen ? "true" : "false");
   head.setAttribute("aria-controls", "stage-body-" + stage.id);
   head.innerHTML =
-    '<span class="stage-title"><span class="stage-number">' + (idx + 1) + "</span>" + esc(stage.title) + "</span>" +
+    '<span class="stage-title"><span class="stage-number">' +
+    (idx + 1) +
+    "</span>" +
+    esc(stage.title) +
+    "</span>" +
     '<span class="stage-head-right">' +
-      '<span class="stage-progress' + (stats.done === stats.total ? " is-complete" : "") + '">' +
-        (stats.done === stats.total ? "Complete ✓" : stats.done + " of " + stats.total) +
-      "</span>" +
-      '<svg class="stage-caret" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>' +
+    '<span class="stage-progress' +
+    (stats.done === stats.total ? " is-complete" : "") +
+    '">' +
+    (stats.done === stats.total ? "Complete ✓" : stats.done + " of " + stats.total) +
+    "</span>" +
+    '<svg class="stage-caret" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>' +
     "</span>";
   head.addEventListener("click", () => {
     const open = stageEl.classList.toggle("is-open");
@@ -261,7 +267,9 @@ export function updateProgressUI(state) {
 
   for (const stage of STAGES) {
     const st = stageStats(stage, state.items);
-    const el = document.querySelector('.checklist-stage[data-stage-id="' + stage.id + '"] .stage-progress');
+    const el = document.querySelector(
+      '.checklist-stage[data-stage-id="' + stage.id + '"] .stage-progress'
+    );
     if (el) {
       el.textContent = st.done === st.total ? "Complete ✓" : st.done + " of " + st.total;
       el.classList.toggle("is-complete", st.done === st.total);
@@ -351,10 +359,10 @@ export function initChecklist() {
     },
   };
 
-  function render() {
+  const render = () => {
     renderChecklist(root, STAGES, state, handlers);
     updateProgressUI(state);
-  }
+  };
 
   function syncOpenStages() {
     document.querySelectorAll(".checklist-stage").forEach((el) => {
@@ -374,17 +382,26 @@ export function initChecklist() {
   }
 
   function resetChecklist() {
-    if (!window.confirm("This will clear every checked item, note, and the project name on this device. Continue?")) return;
+    if (
+      !window.confirm(
+        "This will clear every checked item, note, and the project name on this device. Continue?"
+      )
+    )
+      return;
     state = defaultState();
     saveState();
-    const projectInput = /** @type {HTMLInputElement | null} */ (document.getElementById("project-name"));
+    const projectInput = /** @type {HTMLInputElement | null} */ (
+      document.getElementById("project-name")
+    );
     if (projectInput) projectInput.value = "";
     render();
     showToast("Checklist has been reset.");
   }
 
   function exportJSON() {
-    const blob = new Blob([JSON.stringify(buildBackup(state), null, 2)], { type: "application/json" });
+    const blob = new Blob([JSON.stringify(buildBackup(state), null, 2)], {
+      type: "application/json",
+    });
     const slug =
       (state.project || "engagement-checklist")
         .toLowerCase()
@@ -412,7 +429,9 @@ export function initChecklist() {
         state.items = parsed.items;
         state.celebrated = false;
         saveState();
-        const projectInput = /** @type {HTMLInputElement | null} */ (document.getElementById("project-name"));
+        const projectInput = /** @type {HTMLInputElement | null} */ (
+          document.getElementById("project-name")
+        );
         if (projectInput) projectInput.value = state.project;
         render();
         showToast("Backup restored successfully.");
@@ -427,7 +446,9 @@ export function initChecklist() {
   loadState();
   render();
 
-  const projectInput = /** @type {HTMLInputElement | null} */ (document.getElementById("project-name"));
+  const projectInput = /** @type {HTMLInputElement | null} */ (
+    document.getElementById("project-name")
+  );
   if (projectInput) {
     projectInput.value = state.project;
     projectInput.addEventListener("input", () => {
@@ -442,7 +463,9 @@ export function initChecklist() {
   on("[data-action='collapse-all']", "click", () => setAllStages(false));
   on("[data-action='export-json']", "click", exportJSON);
 
-  const importInput = /** @type {HTMLInputElement | null} */ (document.getElementById("import-file"));
+  const importInput = /** @type {HTMLInputElement | null} */ (
+    document.getElementById("import-file")
+  );
   on("[data-action='import-json']", "click", () => {
     if (importInput) importInput.click();
   });

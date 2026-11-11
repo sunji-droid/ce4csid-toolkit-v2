@@ -89,14 +89,14 @@ By default the form opens the visitor's email app pre-filled (works with zero se
 
 ## Brand compliance (CSID Identity Guidelines)
 
-| Role | Colour |
-|---|---|
-| Primary / text on light | Teal `#044953` |
-| Neutral page background | `#EFF4E3` |
-| Accents (cards) | Lime `#D3F781`, Blue `#46CBDE`, Purple `#BBBDF3`, Red `#FC8170`, Yellow `#FFB605` |
-| Text on dark | Neutral white `#FFFFFF` |
-| Headings / logo | Inter Tight |
-| Body | Inter |
+| Role                    | Colour                                                                            |
+| ----------------------- | --------------------------------------------------------------------------------- |
+| Primary / text on light | Teal `#044953`                                                                    |
+| Neutral page background | `#EFF4E3`                                                                         |
+| Accents (cards)         | Lime `#D3F781`, Blue `#46CBDE`, Purple `#BBBDF3`, Red `#FC8170`, Yellow `#FFB605` |
+| Text on dark            | Neutral white `#FFFFFF`                                                           |
+| Headings / logo         | Inter Tight                                                                       |
+| Body                    | Inter                                                                             |
 
 Text uses only the darkest teal (on light) or neutral white (on dark), per the guide's accessible pairings.
 

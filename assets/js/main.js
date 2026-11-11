@@ -10,10 +10,10 @@ export function initMobileNav() {
   const nav = document.querySelector(".primary-nav");
   if (!toggle || !nav) return;
 
-  function close() {
+  const close = () => {
     nav.classList.remove("is-open");
     toggle.setAttribute("aria-expanded", "false");
-  }
+  };
 
   toggle.addEventListener("click", () => {
     const isOpen = nav.classList.toggle("is-open");
@@ -26,7 +26,12 @@ export function initMobileNav() {
   });
   document.addEventListener("click", (evt) => {
     const target = evt.target;
-    if (nav.classList.contains("is-open") && target instanceof Node && !nav.contains(target) && !toggle.contains(target)) {
+    if (
+      nav.classList.contains("is-open") &&
+      target instanceof Node &&
+      !nav.contains(target) &&
+      !toggle.contains(target)
+    ) {
       close();
     }
   });
@@ -47,9 +52,9 @@ export function markActiveNavLink() {
 export function initHeaderShadow() {
   const header = document.querySelector(".site-header");
   if (!header) return;
-  function update() {
+  const update = () => {
     header.classList.toggle("is-scrolled", window.scrollY > 8);
-  }
+  };
   window.addEventListener("scroll", update, { passive: true });
   update();
 }
@@ -58,7 +63,10 @@ export function initHeaderShadow() {
 export function initReveal() {
   const els = document.querySelectorAll(".reveal");
   if (!els.length) return;
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
+  if (
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+    !("IntersectionObserver" in window)
+  ) {
     els.forEach((el) => el.classList.add("is-visible"));
     return;
   }
