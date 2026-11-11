@@ -4,7 +4,7 @@
 [![CodeQL](https://github.com/sunji-droid/ce4csid-toolkit-v2/actions/workflows/codeql.yml/badge.svg)](https://github.com/sunji-droid/ce4csid-toolkit-v2/actions/workflows/codeql.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-teal.svg)](LICENSE)
 
-Practical resources and guidelines for integrating community engagement into **Climate Sensitive Infectious Disease (CSID)** research, developed by the CE4CSID Working Group with the Botswana Society for Human Development (BSHD).
+Practical resources and guidelines for integrating community engagement into **Climate Sensitive Infectious Disease (CSID)** research, developed by the CE4CSID Working Group / CSID Network.
 
 **Live site:** <https://sunji-droid.github.io/ce4csid-toolkit-v2/>
 
@@ -109,7 +109,7 @@ There is one **regression test per fixed bug** from the hardening audit (`tests/
 │   │   ├── checklist.js         # interactive checklist + backup
 │   │   └── contact.js           # mailto / Formspree handling
 │   ├── fonts/                   # self-hosted Inter + Inter Tight (woff2)
-│   └── images/                  # logo.svg, favicon.svg, og-image.png
+│   └── images/                  # official CSID logo, favicon, share image, LOGO-SOURCE.md
 ├── downloads/                   # toolkit PDFs, DOCX, and the all-in-one zip
 ├── tests/                       # node:test unit + regression suite (jsdom)
 ├── tools/
@@ -133,15 +133,15 @@ git push -u origin main
 
 The site will be live at `https://<you>.github.io/ce4csid-toolkit-v2/`. If you choose a different repo name, update `BASE`/`REPO` in `tools/build_pages.py`, then `npm run build:pages`, and update `sitemap.xml`, `robots.txt`, and the footer GitHub link.
 
-## Swap in the official CSID Network logo
+## Official CSID Network logo
 
-The current mark is a clean placeholder (a globe motif in brand teal). When the official logo arrives:
+The site uses the **official CSID Network artwork** from the Identity Guidelines logo pack:
+the full teal lockup in the header, the neutral-white lockup in the footer, the globe logomark
+as the favicon, and the official social avatar for the apple-touch icon. Provenance and brand
+rules are recorded in `assets/images/LOGO-SOURCE.md`.
 
-1. Replace `assets/images/logo.svg` (header/footer lockup) and `assets/images/favicon.svg`.
-2. The inline SVG in each page's header/footer is the same mark — edit it in `tools/build_pages.py` and run `npm run build:pages`.
-3. Regenerate `assets/images/og-image.png` if desired.
-
-Per the style guide, do not recolour the official globe icon; use it in full colour, brand teal, black, or white only.
+Per the style guide, do not recolour the globe icon with other brand colours; use the logo in
+full colour, brand teal, black, or white only, and keep clear space around the mark.
 
 ## Replace placeholder content
 
@@ -167,7 +167,6 @@ Text uses only the darkest teal (on light) or neutral white (on dark), per the g
 ## Roadmap
 
 - [ ] Replace placeholder downloads with the Working Group's final content.
-- [ ] Swap in the official CSID Network logo and regenerate the share image.
 - [ ] Optional: connect the contact form to a live Formspree endpoint.
 - [ ] Raise the Node floor to 22 and re-enable jsdom / TypeScript major updates.
 - [ ] Gather practitioner feedback and iterate on the checklist actions.
@@ -180,6 +179,6 @@ To report a vulnerability, **do not open a public issue** — see [SECURITY.md](
 
 ## Credits & licence
 
-- Content: CE4CSID Working Group & Botswana Society for Human Development (BSHD).
+- Content: CE4CSID Working Group / CSID Network.
 - Design & development: **Kabo Merapelo Onamile**, Digital Health Developer.
-- Code: MIT Licence (see `LICENSE`). Toolkit content remains the property of the CE4CSID Working Group / BSHD.
+- Code: MIT Licence (see `LICENSE`). Toolkit content remains the property of the CE4CSID Working Group / CSID Network.

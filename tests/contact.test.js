@@ -10,14 +10,14 @@ after(cleanup);
 const fields = {
   name: "Kabo",
   email: "kabo@example.test",
-  organisation: "BSHD",
+  organisation: "CSID Network",
   reason: "Feedback on a resource",
   message: "Please add a consent template.",
 };
 
 test("buildMailto encodes subject and body and defaults the reason", () => {
   const url = buildMailto(fields);
-  assert.ok(url.startsWith("mailto:contactus@bshdngo.org?"));
+  assert.ok(url.startsWith("mailto:mkonamile@gmail.com?"));
   assert.ok(
     url.includes("subject=" + encodeURIComponent("[CE4CSID Toolkit] Feedback on a resource"))
   );

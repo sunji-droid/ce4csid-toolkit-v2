@@ -283,6 +283,23 @@ a.card:hover {
   height: 42px;
   flex: none;
 }
+.brand-logo {
+  display: block;
+  height: 40px;
+  width: auto;
+  flex: none;
+}
+.site-footer .brand-logo {
+  height: 44px;
+}
+@media (max-width: 640px) {
+  .brand-logo {
+    height: 30px;
+  }
+  .brand-text span {
+    display: none;
+  }
+}
 .brand-text {
   font-family: var(--font-head);
   font-weight: 750;
@@ -395,6 +412,12 @@ a.card:hover {
 }
 
 @media (max-width: 940px) {
+  .brand-logo {
+    height: 34px;
+  }
+  .brand-text {
+    font-size: 1.05rem;
+  }
   .nav-toggle {
     display: block;
   }
