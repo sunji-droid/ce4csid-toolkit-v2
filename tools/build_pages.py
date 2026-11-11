@@ -11,13 +11,10 @@ ROOT = os.path.normpath(os.path.join(HERE, ".."))
 BASE = "https://sunji-droid.github.io/ce4csid-toolkit-v2"
 REPO = "https://github.com/sunji-droid/ce4csid-toolkit-v2"
 
-MARK = '''<svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
-        <rect width="48" height="48" rx="14" fill="#044953"/>
-        <circle cx="24" cy="24" r="11.5" fill="none" stroke="#EFF4E3" stroke-width="2"/>
-        <ellipse cx="24" cy="24" rx="5" ry="11.5" fill="none" stroke="#EFF4E3" stroke-width="1.5"/>
-        <path d="M12.5 24h23" stroke="#EFF4E3" stroke-width="1.5"/>
-        <circle cx="33.5" cy="14.5" r="4.2" fill="#D3F781"/>
-      </svg>'''
+# Official CSID Network artwork from the Identity Guidelines logo pack.
+# See assets/images/LOGO-SOURCE.md. Do not recolour or redraw the globe mark.
+LOGO_HEADER = '''<img class="brand-logo" src="assets/images/logo.svg" alt="" width="760" height="212">'''
+LOGO_FOOTER = '''<img class="brand-logo" src="assets/images/logo-white.svg" alt="" width="760" height="212">'''
 
 NAV = [
     ("index.html", "Home", ""),
@@ -49,6 +46,7 @@ def head(title, desc, page):
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-tight-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/style.css">
@@ -68,9 +66,8 @@ def header(active):
     links_html = "\n".join(links)
     return f'''<header class="site-header" role="banner">
   <div class="container">
-    <a href="index.html" class="brand" aria-label="CE4CSID Community Engagement Toolkit — home">
-      <!-- Placeholder mark: swap for the official CSID Network logo when supplied. -->
-      {MARK}
+    <a href="index.html" class="brand" aria-label="CSID Network — CE4CSID Community Engagement Toolkit home">
+      {LOGO_HEADER}
       <span class="brand-text">CE4CSID<span>Community Engagement Toolkit</span></span>
     </a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="primary-navigation" aria-label="Toggle navigation menu">
@@ -90,8 +87,8 @@ FOOTER = f'''<footer class="site-footer" role="contentinfo">
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="index.html" class="brand" aria-label="CE4CSID Community Engagement Toolkit — home">
-          {MARK}
+        <a href="index.html" class="brand" aria-label="CSID Network — CE4CSID Community Engagement Toolkit home">
+          {LOGO_FOOTER}
           <span class="brand-text">CE4CSID<span>Community Engagement Toolkit</span></span>
         </a>
         <p>Practical resources and guidance for integrating community engagement into Climate Sensitive Infectious Disease research, developed by the CE4CSID Working Group.</p>
@@ -108,14 +105,14 @@ FOOTER = f'''<footer class="site-footer" role="contentinfo">
       <div class="footer-col">
         <h3>Contact</h3>
         <ul>
-          <li><a href="mailto:contactus@bshdngo.org">contactus@bshdngo.org</a></li>
+          <li><a href="mailto:mkonamile@gmail.com">mkonamile@gmail.com</a></li>
           <li><a href="contact.html">Contact form</a></li>
           <li><a href="{REPO}" target="_blank" rel="noopener">Project on GitHub</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>&copy; <span data-current-year>2026</span> CE4CSID Working Group and Botswana Society for Human Development (BSHD).</span>
+      <span>&copy; <span data-current-year>2026</span> CSID Network / CE4CSID Working Group.</span>
       <span>Built by Kabo Merapelo Onamile</span>
     </div>
   </div>
@@ -387,7 +384,7 @@ about_body = '''
       <li><div><h4>Read the Toolkit Resources</h4><p>Start with Planning Guidance if you are still shaping the project, or jump to the category that matches your current stage.</p></div></li>
       <li><div><h4>Download what your team needs</h4><p>Every resource and template is available on the Downloads page, ready to adapt to your specific study.</p></div></li>
       <li><div><h4>Work through the Checklist</h4><p>Use the interactive checklist to track engagement actions stage by stage, with notes and a printable export for your project file.</p></div></li>
-      <li><div><h4>Reach out with questions</h4><p>Contact BSHD and the CE4CSID Working Group directly if you need guidance specific to your project context.</p></div></li>
+      <li><div><h4>Reach out with questions</h4><p>Contact the CE4CSID Working Group or the toolkit builder if you need guidance specific to your project context.</p></div></li>
     </ol>
     <div style="text-align:center; margin-top:44px;">
       <a href="resources.html" class="btn btn-primary">Go to Toolkit Resources</a>
@@ -447,7 +444,7 @@ resources_body = '''
   <div class="container reveal">
     <span class="pill-tag">Missing something</span>
     <h2>Have toolkit content to contribute or a resource we should add?</h2>
-    <p>If you are part of the CE4CSID Working Group or BSHD with content ready to share, get in touch and it will be added to the toolkit.</p>
+    <p>If you are part of the CE4CSID Working Group with content ready to share, get in touch and it will be added to the toolkit.</p>
     <a href="contact.html" class="btn btn-lime">Contact the toolkit team</a>
   </div>
 </section>
@@ -593,7 +590,7 @@ contact_body = '''
   <div class="container">
     <span class="eyebrow">Get in touch</span>
     <h1>Questions, feedback, or content to contribute.</h1>
-    <p class="hero-lede">Reach out to BSHD and the CE4CSID Working Group directly, or send a message using the form below.</p>
+    <p class="hero-lede">Reach out about the CE4CSID Community Engagement Toolkit, or send a message using the form below.</p>
   </div>
 </section>
 
@@ -640,10 +637,10 @@ contact_body = '''
 
       <div class="reveal">
         <span class="pill-tag pill-blue">Direct contact</span>
-        <h2 style="margin-bottom:22px;">BSHD and CE4CSID Working Group</h2>
+        <h2 style="margin-bottom:22px;">Toolkit contact</h2>
         <div class="card" style="margin-bottom:18px;">
-          <h3 style="font-size:1.05rem;">Botswana Society for Human Development (BSHD)</h3>
-          <p style="margin-top:8px;">Email: <a href="mailto:contactus@bshdngo.org" style="font-weight:650;">contactus@bshdngo.org</a></p>
+          <h3 style="font-size:1.05rem;">CE4CSID Working Group</h3>
+          <p style="margin-top:8px;">Toolkit content and resources are developed by the CE4CSID Working Group. Use the form to share feedback or content suggestions.</p>
         </div>
         <div class="card" style="margin-bottom:18px;">
           <h3 style="font-size:1.05rem;">Toolkit development and maintenance</h3>
@@ -651,7 +648,7 @@ contact_body = '''
           <p>Email: <a href="mailto:mkonamile@gmail.com" style="font-weight:650;">mkonamile@gmail.com</a></p>
         </div>
         <div class="callout">
-          <strong>Response times:</strong> BSHD and the CE4CSID Working Group aim to respond within a few working days. For urgent matters, please email directly rather than using the form.
+          <strong>Response times:</strong> the toolkit team aims to respond within a few working days. For urgent matters, please email directly rather than using the form.
         </div>
       </div>
 
@@ -662,7 +659,7 @@ contact_body = '''
 
 page("contact.html",
      "Contact | CE4CSID Community Engagement Toolkit",
-     "Contact BSHD and the CE4CSID Working Group about the Community Engagement Toolkit.",
+     "Contact the CE4CSID toolkit team about the Community Engagement Toolkit.",
      contact_body,
      scripts=("main.js", "contact.js"))
 

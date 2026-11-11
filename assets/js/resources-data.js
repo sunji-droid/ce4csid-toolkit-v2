@@ -49,7 +49,7 @@ export const RESOURCES = [
       "A step by step guide for approaching a community respectfully and correctly before any research activity begins.",
     category: "planning-guidance",
     type: "PDF",
-    size: "4 KB",
+    size: "81 KB",
     file: "downloads/planning-guidance-community-entry-protocol.pdf",
   },
   {
@@ -59,7 +59,7 @@ export const RESOURCES = [
       "Guidance for building engagement into a study's methodology, timeline, and budget from the outset.",
     category: "planning-guidance",
     type: "PDF",
-    size: "4 KB",
+    size: "81 KB",
     file: "downloads/planning-guidance-engaging-from-design.pdf",
   },
   {
@@ -69,7 +69,7 @@ export const RESOURCES = [
       "A structured approach for identifying who is affected, who represents them, and who holds influence or trust.",
     category: "engagement-frameworks",
     type: "PDF",
-    size: "4 KB",
+    size: "81 KB",
     file: "downloads/framework-stakeholder-mapping.pdf",
   },
   {
@@ -79,7 +79,7 @@ export const RESOURCES = [
       "A framework for choosing engagement methods and channels that fit the community context.",
     category: "engagement-frameworks",
     type: "PDF",
-    size: "4 KB",
+    size: "81 KB",
     file: "downloads/framework-engagement-channel-selection.pdf",
   },
   {
@@ -89,7 +89,7 @@ export const RESOURCES = [
       "An illustrative case example of engagement practice in a flood related, waterborne disease context.",
     category: "case-examples",
     type: "PDF",
-    size: "4 KB",
+    size: "81 KB",
     file: "downloads/case-example-flood-response.pdf",
   },
   {
@@ -99,7 +99,7 @@ export const RESOURCES = [
       "An illustrative case example of engagement practice in a vector borne disease context.",
     category: "case-examples",
     type: "PDF",
-    size: "4 KB",
+    size: "81 KB",
     file: "downloads/case-example-vector-control.pdf",
   },
   {
@@ -109,7 +109,7 @@ export const RESOURCES = [
       "A structured Word template covering stakeholders, activities, schedule, feedback loop, and budget.",
     category: "templates",
     type: "DOCX",
-    size: "10 KB",
+    size: "49 KB",
     file: "downloads/template-engagement-plan.docx",
   },
   {
@@ -119,7 +119,7 @@ export const RESOURCES = [
       "A Word template for preparing a plain language briefing and consent note for participants.",
     category: "templates",
     type: "DOCX",
-    size: "10 KB",
+    size: "49 KB",
     file: "downloads/template-consent-briefing-note.docx",
   },
 ];

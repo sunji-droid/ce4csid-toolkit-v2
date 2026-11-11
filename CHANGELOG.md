@@ -1,5 +1,16 @@
 # Changelog
 
+## v2.0.1 — 2026-11-11
+
+### Changed
+
+- Replaced the placeholder globe mark with the official CSID Network logo pack supplied with the
+  Identity Guidelines (full teal lockup, neutral-white footer lockup, globe favicon, social avatar).
+- Corrected attribution: the toolkit is CSID Network / CE4CSID Working Group content, built by
+  Kabo Merapelo Onamile. Removed unrelated third-party organisation references from the site,
+  documents, and repo metadata.
+- Contact now routes to the toolkit contact (mkonamile@gmail.com).
+
 ## v2.0.0 — 2026-11-11
 
 Ground-up redesign on the CSID Network Identity Guidelines, in a new repository.

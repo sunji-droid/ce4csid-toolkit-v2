@@ -28,7 +28,7 @@ Working Group members and collaborators adding content or reporting issues.
 
 ## Reporting a problem
 
-Use the [contact form](contact.html) or email **contactus@bshdngo.org** with:
+Use the [contact form](contact.html) or email **mkonamile@gmail.com** with:
 
 - the page and what you expected,
 - what actually happened,

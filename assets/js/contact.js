@@ -10,7 +10,7 @@ import { showToast } from "./util.js";
 
 /** Optional live Formspree endpoint, e.g. "https://formspree.io/f/xxxxxxxx". */
 const FORM_ENDPOINT = "";
-const CONTACT_EMAIL = "contactus@bshdngo.org";
+const CONTACT_EMAIL = "mkonamile@gmail.com";
 
 /**
  * @typedef {Object} ContactFields
@@ -119,7 +119,7 @@ export function initContactForm(endpoint = FORM_ENDPOINT) {
         if (response.ok) {
           form.reset();
           setStatus(
-            "Thank you. Your message has been sent, and BSHD will respond as soon as possible.",
+            "Thank you. Your message has been sent, and the toolkit team will respond as soon as possible.",
             true
           );
           showToast("Message sent successfully.");
