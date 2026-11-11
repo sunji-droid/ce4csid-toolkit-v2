@@ -1,59 +1,55 @@
-/* ============================================================
-   CE4CSID Toolkit v2 — Downloads page
-   Renders the full file table from CE4CSID_RESOURCES with a
-   live filter box. Same data source as the Resources page.
-   ============================================================ */
+// @ts-check
+/**
+ * Downloads page: full file table with a live filter box.
+ * Renders from the same data source as the Resources page.
+ */
+import { CATEGORIES, RESOURCES } from "./resources-data.js";
+import { esc, getCategory } from "./util.js";
 
-(function () {
-  "use strict";
+/** @typedef {import("./util.js").Category} Category */
+/** @typedef {import("./util.js").Resource} Resource */
 
-  var DATA = window.CE4CSID_RESOURCES || [];
-  var CATS = window.CE4CSID_CATEGORIES || [];
-  var COLOR_VAR = {
-    lime: "var(--csid-lime)",
-    blue: "var(--csid-blue)",
-    purple: "var(--csid-purple)",
-    yellow: "var(--csid-yellow)"
-  };
+/** @type {Record<string, string>} */
+const COLOR_VAR = {
+  lime: "var(--csid-lime)",
+  blue: "var(--csid-blue)",
+  purple: "var(--csid-purple)",
+  yellow: "var(--csid-yellow)",
+};
 
-  function catById(id) {
-    for (var i = 0; i < CATS.length; i++) if (CATS[i].id === id) return CATS[i];
-    return { title: id, color: "lime" };
+/**
+ * Filter resources by a free-text query.
+ * @param {Resource[]} data
+ * @param {Category[]} categories
+ * @param {string} query
+ * @returns {Resource[]}
+ */
+export function filterDownloads(data, categories, query) {
+  const q = query.trim().toLowerCase();
+  if (!q) return data.slice();
+  const words = q.split(/\s+/).filter(Boolean);
+  return data.filter((res) => {
+    const hay = (res.title + " " + getCategory(categories, res.category).title + " " + res.type).toLowerCase();
+    return words.every((w) => hay.includes(w));
+  });
+}
+
+/**
+ * Build table rows HTML for the given resources.
+ * @param {Resource[]} rows
+ * @param {Category[]} categories
+ * @returns {string}
+ */
+export function buildDownloadsRowsHTML(rows, categories) {
+  if (!rows.length) {
+    return (
+      '<tr><td colspan="5" style="text-align:center; padding:40px 20px; color:var(--ink-soft);">' +
+      "No files match your search. Try a different word.</td></tr>"
+    );
   }
-
-  function esc(s) {
-    return String(s).replace(/[&<>"']/g, function (c) {
-      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
-    });
-  }
-
-  function render(query) {
-    var tbody = document.getElementById("downloads-tbody");
-    var countEl = document.getElementById("downloads-count");
-    if (!tbody) return;
-    var q = (query || "").trim().toLowerCase();
-
-    var rows = DATA.filter(function (res) {
-      if (!q) return true;
-      var hay = (res.title + " " + catById(res.category).title + " " + res.type).toLowerCase();
-      return q.split(/\s+/).every(function (w) { return hay.indexOf(w) !== -1; });
-    });
-
-    if (countEl) {
-      countEl.textContent = q
-        ? rows.length + (rows.length === 1 ? " file" : " files") + " found"
-        : "All " + DATA.length + " toolkit files";
-    }
-
-    if (!rows.length) {
-      tbody.innerHTML =
-        '<tr><td colspan="5" style="text-align:center; padding:40px 20px; color:var(--ink-soft);">' +
-        "No files match your search. Try a different word.</td></tr>";
-      return;
-    }
-
-    tbody.innerHTML = rows.map(function (res) {
-      var cat = catById(res.category);
+  return rows
+    .map((res) => {
+      const cat = getCategory(categories, res.category);
       return (
         "<tr>" +
           '<td class="dl-title">' + esc(res.title) + "</td>" +
@@ -63,19 +59,40 @@
           '<td><a class="btn btn-ghost btn-sm" href="' + esc(res.file) + '" download aria-label="Download ' + esc(res.title) + '">Download</a></td>' +
         "</tr>"
       );
-    }).join("");
+    })
+    .join("");
+}
+
+/**
+ * Initialise the downloads page. Safe to call when the table body is absent.
+ * @returns {void}
+ */
+export function initDownloads() {
+  const tbody = document.getElementById("downloads-tbody");
+  if (!tbody) return;
+  const countEl = document.getElementById("downloads-count");
+  const input = /** @type {HTMLInputElement | null} */ (document.getElementById("downloads-search"));
+
+  /** @param {string} query */
+  function render(query) {
+    const rows = filterDownloads(RESOURCES, CATEGORIES, query);
+    if (countEl) {
+      countEl.textContent = query.trim()
+        ? rows.length + (rows.length === 1 ? " file" : " files") + " found"
+        : "All " + RESOURCES.length + " toolkit files";
+    }
+    tbody.innerHTML = buildDownloadsRowsHTML(rows, CATEGORIES);
   }
 
-  document.addEventListener("DOMContentLoaded", function () {
-    if (!document.getElementById("downloads-tbody")) return;
-    render("");
-    var input = document.getElementById("downloads-search");
-    if (input) {
-      var timer;
-      input.addEventListener("input", function () {
-        window.clearTimeout(timer);
-        timer = window.setTimeout(function () { render(input.value); }, 120);
-      });
-    }
-  });
-})();
+  render("");
+  if (input) {
+    /** @type {ReturnType<typeof setTimeout> | null} */
+    let timer = null;
+    input.addEventListener("input", () => {
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => render(input.value), 120);
+    });
+  }
+}
+
+document.addEventListener("DOMContentLoaded", initDownloads);

@@ -204,23 +204,29 @@
   </div>
 </section>
 
-<script>
-(function () {
-  try {
-    var raw = window.localStorage.getItem("ce4csid_checklist_v2");
-    if (!raw) return;
-    var s = JSON.parse(raw);
-    var done = 0, total = 20;
-    Object.keys(s.items || {}).forEach(function (k) { if (s.items[k] && s.items[k].checked) done++; });
-    var pct = Math.round((done / total) * 100);
-    var fill = document.getElementById("teaser-fill");
-    var label = document.getElementById("teaser-label");
-    var btn = document.getElementById("teaser-btn");
+<script type="module">
+import { ACTION_COUNT } from "./assets/js/checklist-data.js";
+import { isRecord } from "./assets/js/util.js";
+try {
+  const raw = window.localStorage.getItem("ce4csid_checklist_v2");
+  if (raw) {
+    const saved = JSON.parse(raw);
+    let done = 0;
+    if (isRecord(saved) && isRecord(saved.items)) {
+      for (const value of Object.values(saved.items)) {
+        if (isRecord(value) && value.checked === true) done++;
+      }
+    }
+    const total = ACTION_COUNT;
+    const pct = Math.round((done / total) * 100);
+    const fill = document.getElementById("teaser-fill");
+    const label = document.getElementById("teaser-label");
+    const btn = document.getElementById("teaser-btn");
     if (fill) fill.style.width = pct + "%";
     if (label && done) label.textContent = done + " of " + total + " actions complete on this device";
     if (btn && done) btn.textContent = "Continue the checklist";
-  } catch (e) { /* storage unavailable */ }
-})();
+  }
+} catch { /* storage unavailable */ }
 </script>
 
 </main>
@@ -266,6 +272,6 @@
   </div>
 </footer>
 
-<script src="assets/js/main.js"></script>
+<script type="module" src="assets/js/main.js"></script>
 </body>
 </html>

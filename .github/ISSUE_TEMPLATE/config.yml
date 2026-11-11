@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/sunji-droid/ce4csid-toolkit-v2/security/advisories
+    about: Please report security issues privately, not as public issues.
+  - name: BSHD / CE4CSID Working Group
+    url: mailto:contactus@bshdngo.org
+    about: For content questions or partnership matters, email BSHD directly.

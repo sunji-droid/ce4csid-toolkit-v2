@@ -1,361 +1,472 @@
-/* ============================================================
-   CE4CSID Toolkit v2 — Community Engagement Checklist
-   Five stages, twenty actions. Progress + notes + project name
-   persist in localStorage. New in v2: expand/collapse all,
-   JSON backup export and import, project name on the printed
-   record, and a completion celebration.
-   ============================================================ */
+// @ts-check
+/**
+ * Community Engagement Checklist.
+ * Five stages, twenty actions. Progress + notes + project name persist in
+ * localStorage. Includes expand/collapse all, JSON backup export/import,
+ * a project name on the printed record, and a completion celebration.
+ */
+import { STAGES, ACTION_COUNT } from "./checklist-data.js";
+import { esc, isRecord, on, showToast } from "./util.js";
 
-(function () {
-  "use strict";
+/** @typedef {import("./checklist-data.js").Stage} Stage */
+/** @typedef {import("./checklist-data.js").ChecklistItem} ChecklistItem */
 
-  var STORAGE_KEY = "ce4csid_checklist_v2";
+/**
+ * @typedef {Object} ItemState
+ * @property {boolean} checked
+ * @property {string} note
+ */
 
-  var STAGES = [
-    {
-      id: "design",
-      title: "Project Design",
-      description: "Lay the foundation for engagement before fieldwork or study design is finalised.",
-      items: [
-        { id: "design_scope", label: "Define the CSID issue and geographic scope in plain, non technical language", desc: "Write a short summary of the research question that a community member with no scientific background could understand and react to." },
-        { id: "design_intent", label: "State why community engagement is needed for this specific project", desc: "Be explicit about what engagement is expected to change, inform, or improve, rather than treating it as a formality." },
-        { id: "design_budget", label: "Set aside a dedicated budget and timeline for engagement activities", desc: "Engagement done at the last minute, with no funding of its own, is the most common cause of tokenistic involvement." },
-        { id: "design_risks", label: "Identify risks of excluding affected communities from early design decisions", desc: "Consider reputational, ethical, and scientific risks, including blind spots the research team may not see on its own." }
-      ]
-    },
-    {
-      id: "stakeholders",
-      title: "Stakeholder Identification",
-      description: "Map who is affected, who represents them, and who holds influence or trust.",
-      items: [
-        { id: "stake_map", label: "Create a stakeholder map covering directly affected residents, local leaders, and service providers", desc: "Go beyond formal leadership structures. Include informal community networks, youth groups, and marginalised voices." },
-        { id: "stake_gatekeepers", label: "Identify legitimate community gatekeepers and entry points", desc: "Confirm the correct protocol for approaching a community, including any traditional or local government authorities that expect to be consulted first." },
-        { id: "stake_vulnerable", label: "Flag groups at heightened CSID risk who are often underrepresented", desc: "For example, informal settlement residents, outdoor workers, subsistence farmers, or people with limited access to health services." },
-        { id: "stake_conflicts", label: "Note any existing tensions or history between the community and past research or health projects", desc: "Past negative experiences with researchers or government programmes will shape how the community responds to this project." }
-      ]
-    },
-    {
-      id: "planning",
-      title: "Engagement Planning",
-      description: "Decide how, when, and through which channels engagement will actually happen.",
-      items: [
-        { id: "plan_methods", label: "Select engagement methods appropriate to the context", desc: "Consider community meetings, household visits, radio, local language materials, or existing community structures such as health committees." },
-        { id: "plan_schedule", label: "Build an engagement schedule aligned with the research timeline", desc: "Include time for community feedback to actually influence decisions, not only for announcing decisions already made." },
-        { id: "plan_consent", label: "Prepare consent and information materials in the language and literacy level of the community", desc: "Materials should explain the CSID issue, what participation involves, and how data will be used and protected." },
-        { id: "plan_feedbackloop", label: "Design a clear feedback loop for how community input will be recorded and acted on", desc: "Decide in advance who is responsible for reviewing community input and how decisions arising from it will be communicated back." }
-      ]
-    },
-    {
-      id: "implementation",
-      title: "Implementation",
-      description: "Carry out engagement activities and keep the relationship active throughout the project.",
-      items: [
-        { id: "impl_intro", label: "Hold an initial community introduction session before data collection begins", desc: "Use this session to explain the project, answer questions honestly, and confirm community willingness to proceed." },
-        { id: "impl_training", label: "Brief all field staff on engagement protocols and cultural expectations", desc: "Everyone representing the project in the field should be able to explain the study and engagement process consistently." },
-        { id: "impl_records", label: "Keep a running record of engagement activities, attendance, and issues raised", desc: "This record supports accountability and provides evidence for the evaluation stage." },
-        { id: "impl_grievance", label: "Set up a simple channel for community members to raise concerns during the project", desc: "This can be as simple as a named contact person and phone number shared at every engagement activity." }
-      ]
-    },
-    {
-      id: "evaluation",
-      title: "Feedback and Evaluation",
-      description: "Close the loop with the community and capture lessons for future CSID work.",
-      items: [
-        { id: "eval_share", label: "Share findings back with the community in accessible, non technical form", desc: "Consider a short community meeting, a plain language summary, or a local radio segment ahead of, or alongside, any academic publication." },
-        { id: "eval_input", label: "Collect community feedback on the engagement process itself", desc: "Ask what worked, what felt excluded, and what should be done differently next time." },
-        { id: "eval_lessons", label: "Document lessons learned for future CSID engagement work", desc: "Add these lessons to internal guidance so the next project team does not start from zero." },
-        { id: "eval_continuity", label: "Agree on how the relationship with the community will continue after the project ends", desc: "Communities frequently host repeated research. Ending well protects trust for future engagement." }
-      ]
-    }
-  ];
+/**
+ * @typedef {Object} ChecklistState
+ * @property {string} project
+ * @property {Record<string, ItemState>} items
+ * @property {string[]} openStages
+ * @property {boolean} celebrated
+ */
 
-  var state = { project: "", items: {}, openStages: [STAGES[0].id], celebrated: false };
+/**
+ * @typedef {Object} ChecklistHandlers
+ * @property {(id: string) => void} onToggleStage
+ * @property {(id: string, checked: boolean) => void} onToggleItem
+ * @property {(id: string, note: string) => void} onNote
+ */
 
-  /* ---------- persistence ---------- */
-  function loadState() {
-    try {
-      var raw = window.localStorage.getItem(STORAGE_KEY);
-      if (raw) {
-        var parsed = JSON.parse(raw);
-        if (parsed && typeof parsed === "object") {
-          state.project = typeof parsed.project === "string" ? parsed.project : "";
-          state.items = parsed.items && typeof parsed.items === "object" ? parsed.items : {};
-          state.openStages = Array.isArray(parsed.openStages) ? parsed.openStages : [STAGES[0].id];
-          state.celebrated = !!parsed.celebrated;
-        }
-      }
-    } catch (err) { /* corrupted or unavailable storage: start fresh */ }
+export const STORAGE_KEY = "ce4csid_checklist_v2";
+export const BACKUP_APP = "ce4csid-community-engagement-checklist";
+
+/** @returns {ChecklistState} */
+export function defaultState() {
+  return { project: "", items: {}, openStages: [STAGES[0].id], celebrated: false };
+}
+
+/**
+ * Get a valid item state, falling back to an empty one.
+ * @param {Record<string, ItemState>} items
+ * @param {string} id
+ * @returns {ItemState}
+ */
+export function getItem(items, id) {
+  const raw = items[id];
+  if (raw && typeof raw.checked === "boolean" && typeof raw.note === "string") {
+    return { checked: raw.checked, note: raw.note };
   }
+  return { checked: false, note: "" };
+}
+
+/**
+ * Sanitise an arbitrary items object into valid ItemState entries.
+ * @param {unknown} raw
+ * @returns {Record<string, ItemState>}
+ */
+export function sanitizeItems(raw) {
+  /** @type {Record<string, ItemState>} */
+  const items = {};
+  if (!isRecord(raw)) return items;
+  for (const [key, value] of Object.entries(raw)) {
+    if (isRecord(value) && typeof value.checked === "boolean" && typeof value.note === "string") {
+      items[key] = { checked: value.checked, note: value.note };
+    }
+  }
+  return items;
+}
+
+/**
+ * Parse and validate a backup file payload.
+ * @param {unknown} parsed
+ * @returns {{ project: string, items: Record<string, ItemState> } | null}
+ */
+export function parseBackup(parsed) {
+  if (!isRecord(parsed) || parsed.app !== BACKUP_APP || !isRecord(parsed.items)) return null;
+  return {
+    project: typeof parsed.project === "string" ? parsed.project : "",
+    items: sanitizeItems(parsed.items),
+  };
+}
+
+/**
+ * Completion stats for one stage.
+ * @param {Stage} stage
+ * @param {Record<string, ItemState>} items
+ * @returns {{ total: number, done: number }}
+ */
+export function stageStats(stage, items) {
+  const done = stage.items.filter((item) => getItem(items, item.id).checked).length;
+  return { total: stage.items.length, done };
+}
+
+/**
+ * Completion stats across all stages.
+ * @param {Stage[]} stages
+ * @param {Record<string, ItemState>} items
+ * @returns {{ total: number, done: number, pct: number }}
+ */
+export function overallStats(stages, items) {
+  let total = 0;
+  let done = 0;
+  for (const stage of stages) {
+    const stats = stageStats(stage, items);
+    total += stats.total;
+    done += stats.done;
+  }
+  return { total, done, pct: total ? Math.round((done / total) * 100) : 0 };
+}
+
+/**
+ * Build the DOM for one checklist item.
+ * @param {ChecklistItem} item
+ * @param {ItemState} itemState
+ * @param {ChecklistHandlers} handlers
+ * @returns {HTMLElement}
+ */
+export function buildItem(item, itemState, handlers) {
+  const itemEl = document.createElement("div");
+  itemEl.className = "check-item" + (itemState.checked ? " is-checked" : "");
+
+  const checkboxId = "check_" + item.id;
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.id = checkboxId;
+  checkbox.checked = itemState.checked;
+
+  const bodyDiv = document.createElement("div");
+  bodyDiv.className = "check-item-body";
+
+  const label = document.createElement("label");
+  label.setAttribute("for", checkboxId);
+  label.textContent = item.label;
+
+  const descP = document.createElement("p");
+  descP.className = "item-desc";
+  descP.textContent = item.desc;
+
+  const noteField = document.createElement("textarea");
+  noteField.className = "note-field no-print";
+  noteField.placeholder = "Add a note for this item (optional)";
+  noteField.rows = 1;
+  noteField.value = itemState.note;
+  noteField.setAttribute("aria-label", "Notes for: " + item.label);
+
+  const printNote = document.createElement("p");
+  printNote.className = "print-note" + (itemState.note ? " has-note" : "");
+  printNote.textContent = itemState.note ? "Note: " + itemState.note : "";
+
+  checkbox.addEventListener("change", () => {
+    itemEl.classList.toggle("is-checked", checkbox.checked);
+    handlers.onToggleItem(item.id, checkbox.checked);
+  });
+
+  noteField.addEventListener("input", () => {
+    printNote.textContent = noteField.value ? "Note: " + noteField.value : "";
+    printNote.classList.toggle("has-note", Boolean(noteField.value));
+    handlers.onNote(item.id, noteField.value);
+  });
+
+  bodyDiv.appendChild(label);
+  bodyDiv.appendChild(descP);
+  bodyDiv.appendChild(noteField);
+  bodyDiv.appendChild(printNote);
+  itemEl.appendChild(checkbox);
+  itemEl.appendChild(bodyDiv);
+  return itemEl;
+}
+
+/**
+ * Build the DOM for one stage. The heading wraps the button so the
+ * accordion stays valid HTML (button content must be phrasing content).
+ * @param {Stage} stage
+ * @param {number} idx
+ * @param {ChecklistState} state
+ * @param {ChecklistHandlers} handlers
+ * @returns {HTMLElement}
+ */
+export function buildStage(stage, idx, state, handlers) {
+  const stats = stageStats(stage, state.items);
+  const isOpen = state.openStages.includes(stage.id);
+
+  const stageEl = document.createElement("section");
+  stageEl.className = "checklist-stage" + (isOpen ? " is-open" : "");
+  stageEl.dataset.stageId = stage.id;
+
+  const heading = document.createElement("h3");
+  heading.className = "stage-heading";
+
+  const head = document.createElement("button");
+  head.type = "button";
+  head.className = "stage-head";
+  head.setAttribute("aria-expanded", isOpen ? "true" : "false");
+  head.setAttribute("aria-controls", "stage-body-" + stage.id);
+  head.innerHTML =
+    '<span class="stage-title"><span class="stage-number">' + (idx + 1) + "</span>" + esc(stage.title) + "</span>" +
+    '<span class="stage-head-right">' +
+      '<span class="stage-progress' + (stats.done === stats.total ? " is-complete" : "") + '">' +
+        (stats.done === stats.total ? "Complete ✓" : stats.done + " of " + stats.total) +
+      "</span>" +
+      '<svg class="stage-caret" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>' +
+    "</span>";
+  head.addEventListener("click", () => {
+    const open = stageEl.classList.toggle("is-open");
+    head.setAttribute("aria-expanded", open ? "true" : "false");
+    handlers.onToggleStage(stage.id);
+  });
+  heading.appendChild(head);
+
+  const body = document.createElement("div");
+  body.className = "stage-body";
+  body.id = "stage-body-" + stage.id;
+
+  const desc = document.createElement("p");
+  desc.className = "stage-desc";
+  desc.textContent = stage.description;
+  body.appendChild(desc);
+
+  for (const item of stage.items) {
+    body.appendChild(buildItem(item, getItem(state.items, item.id), handlers));
+  }
+
+  stageEl.appendChild(heading);
+  stageEl.appendChild(body);
+  return stageEl;
+}
+
+/**
+ * Render all stages into a root element.
+ * @param {HTMLElement} root
+ * @param {Stage[]} stages
+ * @param {ChecklistState} state
+ * @param {ChecklistHandlers} handlers
+ * @returns {void}
+ */
+export function renderChecklist(root, stages, state, handlers) {
+  root.innerHTML = "";
+  stages.forEach((stage, idx) => root.appendChild(buildStage(stage, idx, state, handlers)));
+}
+
+/**
+ * Update progress bar, counts, and per-stage completion labels.
+ * @param {ChecklistState} state
+ * @returns {void}
+ */
+export function updateProgressUI(state) {
+  const stats = overallStats(STAGES, state.items);
+  const fill = /** @type {HTMLElement | null} */ (document.querySelector(".progress-fill"));
+  const count = document.querySelector("[data-progress-count]");
+  const pct = document.querySelector("[data-progress-pct]");
+  if (fill) {
+    fill.style.width = stats.pct + "%";
+    fill.classList.toggle("is-complete", stats.pct === 100);
+  }
+  if (count) count.textContent = stats.done + " of " + stats.total + " actions complete";
+  if (pct) pct.textContent = stats.pct + "%";
+
+  for (const stage of STAGES) {
+    const st = stageStats(stage, state.items);
+    const el = document.querySelector('.checklist-stage[data-stage-id="' + stage.id + '"] .stage-progress');
+    if (el) {
+      el.textContent = st.done === st.total ? "Complete ✓" : st.done + " of " + st.total;
+      el.classList.toggle("is-complete", st.done === st.total);
+    }
+  }
+
+  if (stats.pct === 100 && !state.celebrated) {
+    state.celebrated = true;
+    showToast("All " + ACTION_COUNT + " actions complete — engagement plan ready. 🎉");
+  }
+  if (stats.pct < 100 && state.celebrated) {
+    state.celebrated = false;
+  }
+}
+
+/**
+ * Build a backup payload.
+ * @param {ChecklistState} state
+ * @returns {Record<string, unknown>}
+ */
+export function buildBackup(state) {
+  return {
+    app: BACKUP_APP,
+    version: 2,
+    exportedAt: new Date().toISOString(),
+    project: state.project,
+    items: state.items,
+  };
+}
+
+/**
+ * Initialise the checklist page. Safe to call when the root is absent.
+ * @returns {void}
+ */
+export function initChecklist() {
+  const root = document.getElementById("checklist-root");
+  if (!root) return;
+
+  let state = defaultState();
 
   function saveState() {
-    try { window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (err) { /* private mode */ }
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch {
+      /* private mode or unavailable storage */
+    }
   }
 
-  function getItem(id) { return state.items[id] || { checked: false, note: "" }; }
-
-  /* ---------- stats ---------- */
-  function stageStats(stage) {
-    var done = stage.items.filter(function (i) { return getItem(i.id).checked; }).length;
-    return { total: stage.items.length, done: done };
+  function loadState() {
+    try {
+      const raw = window.localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const parsed = JSON.parse(raw);
+      if (!isRecord(parsed)) return;
+      state.project = typeof parsed.project === "string" ? parsed.project : "";
+      state.items = sanitizeItems(parsed.items);
+      state.openStages = Array.isArray(parsed.openStages)
+        ? parsed.openStages.filter((id) => typeof id === "string")
+        : [STAGES[0].id];
+      state.celebrated = Boolean(parsed.celebrated);
+    } catch {
+      state = defaultState();
+    }
   }
 
-  function overallStats() {
-    var total = 0, done = 0;
-    STAGES.forEach(function (s) { var st = stageStats(s); total += st.total; done += st.done; });
-    return { total: total, done: done, pct: total ? Math.round((done / total) * 100) : 0 };
-  }
+  /** @type {ChecklistHandlers} */
+  const handlers = {
+    onToggleStage(id) {
+      const i = state.openStages.indexOf(id);
+      if (i === -1) state.openStages.push(id);
+      else state.openStages.splice(i, 1);
+      saveState();
+    },
+    onToggleItem(id, checked) {
+      const item = getItem(state.items, id);
+      item.checked = checked;
+      state.items[id] = item;
+      saveState();
+      updateProgressUI(state);
+      saveState();
+    },
+    onNote(id, note) {
+      const item = getItem(state.items, id);
+      item.note = note;
+      state.items[id] = item;
+      saveState();
+    },
+  };
 
-  /* ---------- rendering ---------- */
   function render() {
-    var root = document.getElementById("checklist-root");
-    if (!root) return;
-    root.innerHTML = "";
-
-    STAGES.forEach(function (stage, idx) {
-      var stats = stageStats(stage);
-      var isOpen = state.openStages.indexOf(stage.id) !== -1;
-
-      var stageEl = document.createElement("section");
-      stageEl.className = "checklist-stage" + (isOpen ? " is-open" : "");
-      stageEl.dataset.stageId = stage.id;
-
-      var head = document.createElement("button");
-      head.type = "button";
-      head.className = "stage-head";
-      head.setAttribute("aria-expanded", isOpen ? "true" : "false");
-      head.setAttribute("aria-controls", "stage-body-" + stage.id);
-      head.innerHTML =
-        "<h3><span class=\"stage-number\">" + (idx + 1) + "</span>" + stage.title + "</h3>" +
-        "<span class=\"stage-head-right\">" +
-          "<span class=\"stage-progress" + (stats.done === stats.total ? " is-complete" : "") + "\">" +
-            (stats.done === stats.total ? "Complete ✓" : stats.done + " of " + stats.total) +
-          "</span>" +
-          '<svg class="stage-caret" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>' +
-        "</span>";
-      head.addEventListener("click", function () {
-        var i = state.openStages.indexOf(stage.id);
-        if (i === -1) state.openStages.push(stage.id); else state.openStages.splice(i, 1);
-        saveState();
-        stageEl.classList.toggle("is-open");
-        head.setAttribute("aria-expanded", stageEl.classList.contains("is-open") ? "true" : "false");
-      });
-
-      var body = document.createElement("div");
-      body.className = "stage-body";
-      body.id = "stage-body-" + stage.id;
-
-      var desc = document.createElement("p");
-      desc.className = "stage-desc";
-      desc.textContent = stage.description;
-      body.appendChild(desc);
-
-      stage.items.forEach(function (item) {
-        var itemState = getItem(item.id);
-        var itemEl = document.createElement("div");
-        itemEl.className = "check-item" + (itemState.checked ? " is-checked" : "");
-
-        var checkboxId = "check_" + item.id;
-        var checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.id = checkboxId;
-        checkbox.checked = itemState.checked;
-
-        var bodyDiv = document.createElement("div");
-        bodyDiv.className = "check-item-body";
-
-        var label = document.createElement("label");
-        label.setAttribute("for", checkboxId);
-        label.textContent = item.label;
-
-        var descP = document.createElement("p");
-        descP.className = "item-desc";
-        descP.textContent = item.desc;
-
-        var noteField = document.createElement("textarea");
-        noteField.className = "note-field no-print";
-        noteField.placeholder = "Add a note for this item (optional)";
-        noteField.rows = 1;
-        noteField.value = itemState.note;
-        noteField.setAttribute("aria-label", "Notes for: " + item.label);
-
-        var printNote = document.createElement("p");
-        printNote.className = "print-note" + (itemState.note ? " has-note" : "");
-        printNote.textContent = itemState.note ? "Note: " + itemState.note : "";
-
-        checkbox.addEventListener("change", function () {
-          var s = getItem(item.id);
-          s.checked = checkbox.checked;
-          state.items[item.id] = s;
-          saveState();
-          itemEl.classList.toggle("is-checked", checkbox.checked);
-          refreshProgress();
-        });
-
-        noteField.addEventListener("input", function () {
-          var s = getItem(item.id);
-          s.note = noteField.value;
-          state.items[item.id] = s;
-          saveState();
-          printNote.textContent = noteField.value ? "Note: " + noteField.value : "";
-          printNote.classList.toggle("has-note", !!noteField.value);
-        });
-
-        bodyDiv.appendChild(label);
-        bodyDiv.appendChild(descP);
-        bodyDiv.appendChild(noteField);
-        bodyDiv.appendChild(printNote);
-        itemEl.appendChild(checkbox);
-        itemEl.appendChild(bodyDiv);
-        body.appendChild(itemEl);
-      });
-
-      stageEl.appendChild(head);
-      stageEl.appendChild(body);
-      root.appendChild(stageEl);
-    });
-
-    refreshProgress();
+    renderChecklist(root, STAGES, state, handlers);
+    updateProgressUI(state);
   }
 
-  function refreshProgress() {
-    var stats = overallStats();
-    var fill = document.querySelector(".progress-fill");
-    var count = document.querySelector("[data-progress-count]");
-    var pct = document.querySelector("[data-progress-pct]");
-    if (fill) {
-      fill.style.width = stats.pct + "%";
-      fill.classList.toggle("is-complete", stats.pct === 100);
-    }
-    if (count) count.textContent = stats.done + " of " + stats.total + " actions complete";
-    if (pct) pct.textContent = stats.pct + "%";
-
-    STAGES.forEach(function (stage) {
-      var st = stageStats(stage);
-      var el = document.querySelector('.checklist-stage[data-stage-id="' + stage.id + '"] .stage-progress');
-      if (el) {
-        el.textContent = st.done === st.total ? "Complete ✓" : st.done + " of " + st.total;
-        el.classList.toggle("is-complete", st.done === st.total);
-      }
-    });
-
-    if (stats.pct === 100 && !state.celebrated) {
-      state.celebrated = true;
-      saveState();
-      toast("All 20 actions complete — engagement plan ready. 🎉");
-    }
-    if (stats.pct < 100 && state.celebrated) {
-      state.celebrated = false;
-      saveState();
-    }
-  }
-
-  function toast(msg) {
-    if (window.CE4CSID && window.CE4CSID.showToast) window.CE4CSID.showToast(msg);
-  }
-
-  /* ---------- toolbar actions ---------- */
-  function setAllStages(open) {
-    state.openStages = open ? STAGES.map(function (s) { return s.id; }) : [];
-    saveState();
-    document.querySelectorAll(".checklist-stage").forEach(function (el) {
+  function syncOpenStages() {
+    document.querySelectorAll(".checklist-stage").forEach((el) => {
+      const id = el instanceof HTMLElement ? el.dataset.stageId || "" : "";
+      const open = state.openStages.includes(id);
       el.classList.toggle("is-open", open);
-      var head = el.querySelector(".stage-head");
+      const head = el.querySelector(".stage-head");
       if (head) head.setAttribute("aria-expanded", open ? "true" : "false");
     });
   }
 
+  /** @param {boolean} open */
+  function setAllStages(open) {
+    state.openStages = open ? STAGES.map((s) => s.id) : [];
+    saveState();
+    syncOpenStages();
+  }
+
   function resetChecklist() {
     if (!window.confirm("This will clear every checked item, note, and the project name on this device. Continue?")) return;
-    state = { project: "", items: {}, openStages: [STAGES[0].id], celebrated: false };
+    state = defaultState();
     saveState();
-    var projectInput = document.getElementById("project-name");
+    const projectInput = /** @type {HTMLInputElement | null} */ (document.getElementById("project-name"));
     if (projectInput) projectInput.value = "";
     render();
-    toast("Checklist has been reset.");
+    showToast("Checklist has been reset.");
   }
 
   function exportJSON() {
-    var payload = {
-      app: "ce4csid-community-engagement-checklist",
-      version: 2,
-      exportedAt: new Date().toISOString(),
-      project: state.project,
-      items: state.items
-    };
-    var blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
-    var a = document.createElement("a");
-    var slug = (state.project || "engagement-checklist").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "engagement-checklist";
-    a.href = URL.createObjectURL(blob);
+    const blob = new Blob([JSON.stringify(buildBackup(state), null, 2)], { type: "application/json" });
+    const slug =
+      (state.project || "engagement-checklist")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "") || "engagement-checklist";
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
     a.download = slug + "-backup.json";
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    URL.revokeObjectURL(a.href);
-    toast("Backup downloaded. Keep it safe or move it to another device.");
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    showToast("Backup downloaded. Keep it safe or move it to another device.");
   }
 
+  /** @param {File} file */
   function importJSON(file) {
-    var reader = new FileReader();
-    reader.onload = function () {
+    const reader = new FileReader();
+    reader.onload = () => {
       try {
-        var parsed = JSON.parse(reader.result);
-        if (!parsed || parsed.app !== "ce4csid-community-engagement-checklist" || typeof parsed.items !== "object") {
-          throw new Error("not a checklist backup");
-        }
-        state.project = typeof parsed.project === "string" ? parsed.project : "";
-        state.items = parsed.items || {};
+        const parsed = parseBackup(JSON.parse(String(reader.result)));
+        if (!parsed) throw new Error("invalid backup");
+        state.project = parsed.project;
+        state.items = parsed.items;
         state.celebrated = false;
         saveState();
-        var projectInput = document.getElementById("project-name");
+        const projectInput = /** @type {HTMLInputElement | null} */ (document.getElementById("project-name"));
         if (projectInput) projectInput.value = state.project;
         render();
-        toast("Backup restored successfully.");
-      } catch (err) {
-        toast("That file is not a valid checklist backup.");
+        showToast("Backup restored successfully.");
+      } catch {
+        showToast("That file is not a valid checklist backup.");
       }
     };
+    reader.onerror = () => showToast("Could not read that file. Please try again.");
     reader.readAsText(file);
   }
 
-  function initToolbar() {
-    var projectInput = document.getElementById("project-name");
-    if (projectInput) {
-      projectInput.value = state.project;
-      projectInput.addEventListener("input", function () {
-        state.project = projectInput.value;
-        saveState();
-      });
-    }
+  loadState();
+  render();
 
-    on("[data-action='reset-checklist']", "click", resetChecklist);
-    on("[data-action='print-checklist']", "click", function () { window.print(); });
-    on("[data-action='expand-all']", "click", function () { setAllStages(true); });
-    on("[data-action='collapse-all']", "click", function () { setAllStages(false); });
-    on("[data-action='export-json']", "click", exportJSON);
-
-    var importInput = document.getElementById("import-file");
-    on("[data-action='import-json']", "click", function () {
-      if (importInput) importInput.click();
+  const projectInput = /** @type {HTMLInputElement | null} */ (document.getElementById("project-name"));
+  if (projectInput) {
+    projectInput.value = state.project;
+    projectInput.addEventListener("input", () => {
+      state.project = projectInput.value;
+      saveState();
     });
-    if (importInput) {
-      importInput.addEventListener("change", function () {
-        if (importInput.files && importInput.files[0]) importJSON(importInput.files[0]);
-        importInput.value = "";
-      });
-    }
-
-    window.addEventListener("beforeprint", function () { setAllStages(true); });
   }
 
-  function on(selector, evt, fn) {
-    var el = document.querySelector(selector);
-    if (el) el.addEventListener(evt, fn);
-  }
+  on("[data-action='reset-checklist']", "click", resetChecklist);
+  on("[data-action='print-checklist']", "click", () => window.print());
+  on("[data-action='expand-all']", "click", () => setAllStages(true));
+  on("[data-action='collapse-all']", "click", () => setAllStages(false));
+  on("[data-action='export-json']", "click", exportJSON);
 
-  document.addEventListener("DOMContentLoaded", function () {
-    if (!document.getElementById("checklist-root")) return;
-    loadState();
-    render();
-    initToolbar();
+  const importInput = /** @type {HTMLInputElement | null} */ (document.getElementById("import-file"));
+  on("[data-action='import-json']", "click", () => {
+    if (importInput) importInput.click();
   });
-})();
+  if (importInput) {
+    importInput.addEventListener("change", () => {
+      if (importInput.files && importInput.files[0]) importJSON(importInput.files[0]);
+      importInput.value = "";
+    });
+  }
+
+  /** @type {string[] | null} */
+  let beforePrintOpen = null;
+  window.addEventListener("beforeprint", () => {
+    beforePrintOpen = state.openStages.slice();
+    setAllStages(true);
+  });
+  window.addEventListener("afterprint", () => {
+    if (beforePrintOpen) {
+      state.openStages = beforePrintOpen;
+      beforePrintOpen = null;
+      saveState();
+      syncOpenStages();
+    }
+  });
+}
+
+document.addEventListener("DOMContentLoaded", initChecklist);

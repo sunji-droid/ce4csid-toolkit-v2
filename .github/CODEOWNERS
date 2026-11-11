@@ -1,0 +1,8 @@
+# Default owner for everything in the repository.
+* @sunji-droid
+
+# Content and brand-sensitive files.
+/downloads/ @sunji-droid
+/assets/images/ @sunji-droid
+README.md @sunji-droid
+CHANGELOG.md @sunji-droid

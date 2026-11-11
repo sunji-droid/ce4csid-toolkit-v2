@@ -11,3 +11,11 @@ node_modules/
 # Python cache (tools/)
 __pycache__/
 *.pyc
+
+# Local secrets / tooling output
+.env
+.env.*
+!.env.example
+coverage/
+.vitest/
+*.tsbuildinfo
