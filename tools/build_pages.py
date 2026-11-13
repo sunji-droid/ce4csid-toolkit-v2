@@ -66,7 +66,7 @@ def header(active):
     links_html = "\n".join(links)
     return f'''<header class="site-header" role="banner">
   <div class="container">
-    <a href="index.html" class="brand" aria-label="CSID Network — CE4CSID Community Engagement Toolkit home">
+    <a href="index.html" class="brand" aria-label="CSID Network, CE4CSID Community Engagement Toolkit home">
       {LOGO_HEADER}
       <span class="brand-text">CE4CSID<span>Community Engagement Toolkit</span></span>
     </a>
@@ -87,7 +87,7 @@ FOOTER = f'''<footer class="site-footer" role="contentinfo">
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="index.html" class="brand" aria-label="CSID Network — CE4CSID Community Engagement Toolkit home">
+        <a href="index.html" class="brand" aria-label="CSID Network, CE4CSID Community Engagement Toolkit home">
           {LOGO_FOOTER}
           <span class="brand-text">CE4CSID<span>Community Engagement Toolkit</span></span>
         </a>
@@ -138,7 +138,7 @@ index_body = '''
   <div class="container">
     <span class="eyebrow">CE4CSID Working Group</span>
     <h1>Community engagement, built into CSID research <em>from the start</em>.</h1>
-    <p class="hero-lede">Climate Sensitive Infectious Disease research is often run at a high scientific level, without the communities who face its direct impact. This toolkit gives researchers practical resources and guidance to change that — from project design through to evaluation. Free and open access, always.</p>
+    <p class="hero-lede">Climate Sensitive Infectious Disease research is often run at a high scientific level, without the communities who face its direct impact. This toolkit gives researchers resources and guidance for including communities from project design through to evaluation. All resources are free to use.</p>
     <div class="hero-actions">
       <a href="resources.html" class="btn btn-primary">Browse the toolkit resources</a>
       <a href="checklist.html" class="btn btn-secondary">Open the engagement checklist</a>
@@ -165,7 +165,7 @@ index_body = '''
     <div class="section-head center reveal">
       <span class="pill-tag">Why this exists</span>
       <h2>Research shapes communities. Communities should shape research.</h2>
-      <p>Involving communities from the earliest stages of project design helps shape interventions in ways that benefit both CSID professionals and the people who face the impact directly — whether the initiative involves research, policy, or the development of digital tools.</p>
+      <p>Involving communities from the earliest stages of project design helps shape interventions that benefit CSID professionals and the people affected by them. This applies whether the initiative involves research, policy, or digital tools.</p>
     </div>
     <div class="grid grid-3">
       <div class="card reveal">
@@ -267,7 +267,7 @@ index_body = '''
         </div>
       </div>
       <div style="padding:28px 30px;">
-        <p style="color:var(--ink-soft);">Work through five planning stages at your own pace. Tick off actions as your team completes them, add notes against each item, and export a clean printable record for your project file. Your progress is saved automatically on this device — and you can back it up or move it between devices.</p>
+        <p style="color:var(--ink-soft);">Work through five planning stages at your own pace. Tick off actions as your team completes them, add notes against each item, and export a printable record for your project file. Progress is saved automatically on this device. You can also back it up or move it between devices.</p>
       </div>
     </div>
   </div>
@@ -275,9 +275,9 @@ index_body = '''
 
 <section class="section on-dark texture-topo cta-band">
   <div class="container reveal">
-    <span class="pill-tag">Ready when you are</span>
+    <span class="pill-tag">Next steps</span>
     <h2>Plan community engagement into your next CSID project.</h2>
-    <p>Everything here is free, open, and built to be used on a real project timeline and budget.</p>
+    <p>All resources are free to use and designed for real project timelines and budgets.</p>
     <div class="hero-actions" style="justify-content:center;">
       <a href="checklist.html" class="btn btn-lime">Open the checklist</a>
       <a href="contact.html" class="btn btn-secondary">Contact the team</a>
@@ -323,7 +323,7 @@ about_body = '''
   <div class="container">
     <span class="eyebrow">About the toolkit</span>
     <h1>Who we are, and who this toolkit is built for.</h1>
-    <p class="hero-lede">The CE4CSID Working Group brings together researchers and practitioners working on Climate Sensitive Infectious Disease, with a shared view that community involvement should shape a project from its earliest stages — not just its final reporting.</p>
+    <p class="hero-lede">The CE4CSID Working Group brings together researchers and practitioners working on Climate Sensitive Infectious Disease. Community involvement should shape a project from its earliest stages, not only its final reporting.</p>
   </div>
 </section>
 
@@ -334,10 +334,10 @@ about_body = '''
         <span class="pill-tag">The working group</span>
         <h2>Practical guidance, grounded in real CSID work.</h2>
         <p style="color:var(--ink-soft); margin-top:16px;">The CE4CSID Working Group has been developing a set of practical resources and guidelines that researchers can use to plan and integrate community engagement into their CSID research programmes. Climate Sensitive Infectious Disease sits at the intersection of environmental change and health, and its impact is felt first and most directly by the communities living with that change.</p>
-        <p style="color:var(--ink-soft); margin-top:16px;">While numerous CSID initiatives exist globally, many are run at a high scientific level and do not include the communities who face the direct impact of CSID. This toolkit exists to close that gap — with resources that are practical enough to use on a real project timeline and budget.</p>
+        <p style="color:var(--ink-soft); margin-top:16px;">Many CSID initiatives are run at a high scientific level and do not include the communities who face the direct impact of CSID. This toolkit helps close that gap with resources designed for real project timelines and budgets.</p>
       </div>
       <div class="callout callout-lime reveal">
-        <strong>In short:</strong> involving communities from the earliest stages of project design helps shape interventions in ways that benefit both CSID professionals and community members — whether the initiative involves research, policy, or the development of digital tools.
+        <strong>Summary:</strong> involving communities from the earliest stages of project design helps shape interventions that benefit CSID professionals and community members. This applies whether the initiative involves research, policy, or digital tools.
       </div>
     </div>
   </div>
@@ -493,7 +493,7 @@ for part in TOOLKIT_PARTS:
             f'<article class="toolkit-chapter reveal" id="chapter-{ch["n"]}" data-chapter="{ch["n"]}" aria-labelledby="chapter-{ch["n"]}-title">'
             f'<div class="chapter-head"><span class="chapter-num" aria-hidden="true">{ch["n"]}</span>'
             f'<h3 id="chapter-{ch["n"]}-title">{ch["title"]}</h3></div>'
-            f'<div class="chapter-content"><p class="chapter-placeholder">Final Working Group content for this chapter will be added here.</p></div>'
+            f'<div class="chapter-content"><p class="chapter-placeholder">This chapter will contain the final Working Group content.</p></div>'
             f"{links_html}"
             f"</article>"
         )
@@ -514,7 +514,7 @@ resources_body = f'''
   <div class="container">
     <span class="eyebrow">Toolkit structure and resources</span>
     <h1>The toolkit, organised chapter by chapter.</h1>
-    <p class="hero-lede">The toolkit follows the CE4CSID Working Group's six-part structure below. Each chapter is a ready space for final content; current placeholder resources are linked where they fit, and the searchable resource library remains underneath.</p>
+    <p class="hero-lede">The toolkit follows the CE4CSID Working Group's six-part structure below. Each chapter has a place for final content. Current placeholder resources are linked where they fit, and the searchable resource library is below.</p>
   </div>
 </section>
 
@@ -549,7 +549,7 @@ resources_body = f'''
       <div class="search-wrap">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
         <label class="sr-only" for="resource-search">Search toolkit resources</label>
-        <input type="search" id="resource-search" class="search-input" placeholder="Search resources — try consent, stakeholders, flood…" autocomplete="off">
+        <input type="search" id="resource-search" class="search-input" placeholder="Search resources, e.g. consent, stakeholders, flood" autocomplete="off">
         <button type="button" id="search-clear" class="search-clear" aria-label="Clear search">&times;</button>
       </div>
       <div class="filter-row" role="group" aria-label="Filter resources by category">
@@ -596,7 +596,7 @@ downloads_body = '''
   <div class="container">
     <span class="eyebrow">Downloads</span>
     <h1>Every toolkit file, in one place.</h1>
-    <p class="hero-lede">Every toolkit resource and template, with file type and size. Grab exactly what you need, or download the complete set in one zip.</p>
+    <p class="hero-lede">Download individual toolkit resources and templates, or download the complete set as a zip.</p>
   </div>
 </section>
 
@@ -607,7 +607,7 @@ downloads_body = '''
       <div class="search-wrap">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
         <label class="sr-only" for="downloads-search">Filter downloads</label>
-        <input type="search" id="downloads-search" class="search-input" placeholder="Filter files by name, category, or type…" autocomplete="off">
+        <input type="search" id="downloads-search" class="search-input" placeholder="Filter files by name, category, or type..." autocomplete="off">
       </div>
       <a href="downloads/ce4csid-toolkit-all-resources.zip" class="btn btn-primary" download>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
@@ -639,7 +639,7 @@ downloads_body = '''
     </noscript>
 
     <div class="callout callout-yellow" style="margin-top:32px;">
-      <strong>About this content:</strong> the documents above are placeholder versions prepared for the initial toolkit launch, clearly marked as such inside each file. They will be replaced with the CE4CSID Working Group's final material once it is supplied — with no change needed to these download links or page structure.
+      <strong>About this content:</strong> the documents above are placeholder versions for the initial toolkit launch and are marked as such inside each file. The CE4CSID Working Group's final material will replace them when supplied. The download links and page structure will not change.
     </div>
 
   </div>
@@ -670,7 +670,7 @@ checklist_body = '''
       <div class="checklist-toolbar">
         <div class="progress-block">
           <div class="progress-label">
-            <span data-progress-count>Loading checklist…</span>
+            <span data-progress-count>Loading checklist...</span>
             <strong data-progress-pct>0%</strong>
           </div>
           <div class="progress-track"><div class="progress-fill"></div></div>
@@ -802,8 +802,8 @@ notfound_body = '''
   <div class="hero-blob hero-blob-lime" aria-hidden="true"></div>
   <div class="container">
     <div class="error-code" aria-hidden="true">404</div>
-    <h1 style="max-width:none;">This page wandered off the map.</h1>
-    <p class="hero-lede" style="margin-left:auto; margin-right:auto;">The page you are looking for does not exist or may have moved. Let's get you back to the toolkit.</p>
+    <h1 style="max-width:none;">Page not found.</h1>
+    <p class="hero-lede" style="margin-left:auto; margin-right:auto;">The page you are looking for does not exist or may have moved. Use the links below to return to the toolkit.</p>
     <div class="hero-actions" style="justify-content:center;">
       <a href="index.html" class="btn btn-primary">Back to home</a>
       <a href="resources.html" class="btn btn-secondary">Browse resources</a>

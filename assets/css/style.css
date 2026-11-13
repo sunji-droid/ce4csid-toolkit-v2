@@ -1,5 +1,5 @@
 /* ============================================================
-   CE4CSID Community Engagement Toolkit — v2
+   CE4CSID Community Engagement Toolkit, v2
    Design system built on the CSID Network Identity Guidelines:
    - Palette: Teal / Lime / Blue / Purple / Red / Yellow
    - Text: darkest teal (#044953) on light, neutral white on dark
@@ -151,9 +151,35 @@ h4 {
 }
 p {
   margin: 0 0 1em;
+  text-align: justify;
+  text-justify: inter-word;
+  text-wrap: pretty;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  overflow-wrap: break-word;
 }
 p:last-child {
   margin-bottom: 0;
+}
+.form-note,
+.result-count,
+.resource-meta,
+.stat-label,
+.footer-bottom,
+.checklist-footer,
+.no-results p,
+.error-hero p {
+  text-align: left;
+}
+.section-head.center p,
+.cta-band p {
+  text-align: justify;
+}
+.callout {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
 }
 ul,
 ol {

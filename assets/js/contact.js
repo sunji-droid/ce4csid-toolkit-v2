@@ -37,7 +37,7 @@ export function buildMailto(fields, contactEmail = CONTACT_EMAIL) {
     fields.email +
     "\n" +
     "Organisation: " +
-    (fields.organisation || "—") +
+    (fields.organisation || "Not provided") +
     "\n" +
     "Reason: " +
     fields.reason +
@@ -106,7 +106,7 @@ export function initContactForm(endpoint = FORM_ENDPOINT) {
 
     if (submitBtn) {
       submitBtn.disabled = true;
-      submitBtn.textContent = "Sending…";
+      submitBtn.textContent = "Sending...";
     }
     setStatus("", true);
 

@@ -1,4 +1,4 @@
-// Regression suite: one test per bug fixed in the Stage-1 audit (F1–F15).
+// Regression suite: one test per bug fixed in the Stage-1 audit (F1 to F15).
 // Each test is named after its finding so a future change that reintroduces
 // the bug fails loudly with the finding id.
 import { test, after } from "node:test";
@@ -213,4 +213,37 @@ test("Public contact email is the CE4CSID Working Group address", () => {
     assert.ok(src.includes(email), f + " should use the Working Group email");
     assert.ok(!src.includes("mkonamile@gmail.com"), f + " should not use the old personal email");
   }
+});
+
+test("Copy polish: public pages and scripts avoid em/en dashes and formulaic filler", () => {
+  const files = [
+    "index.html",
+    "about.html",
+    "resources.html",
+    "downloads.html",
+    "checklist.html",
+    "contact.html",
+    "404.html",
+    "assets/js/contact.js",
+    "assets/js/checklist.js",
+    "README.md",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+  ];
+  for (const f of files) {
+    const src = read(f);
+    assert.ok(!/[\u2014\u2013\u2015]/.test(src), f + " should not contain em/en dashes");
+    assert.ok(
+      !/free and open access, always|ready when you are|wandered off the map|in today's fast|delve into|tapestry/i.test(
+        src
+      ),
+      f + " should avoid formulaic filler"
+    );
+  }
+});
+
+test("Body paragraphs are justified with hyphenation, while short UI text stays left-aligned", () => {
+  const css = read("assets/css/style.css");
+  assert.ok(/p\s*\{[^}]*text-align:\s*justify[^}]*hyphens:\s*auto/s.test(css));
+  assert.ok(/\.form-note,[\s\S]*?text-align:\s*left;/.test(css));
 });

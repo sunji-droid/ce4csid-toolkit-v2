@@ -36,7 +36,7 @@ Use the [contact form](contact.html) or email **wg-ce4csid@csidnet.org** with:
 
 ## Development workflow
 
-The visitor-facing site has **no runtime dependencies** — keep it that way. All
+The visitor-facing site has **no runtime dependencies**. Keep it that way. All
 tooling (lint, tests, types) is dev-only.
 
 ```bash

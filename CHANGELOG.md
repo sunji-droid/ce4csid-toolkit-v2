@@ -1,28 +1,30 @@
 # Changelog
 
-## Unreleased
+## v2.1.0 - 2026-11-13
+
+### Added
+
+- Six-part, sixteen-chapter toolkit structure on the Resources page, with stable chapter content
+  spaces and links to the current placeholder resources.
+- Regression tests for the layout guide, public contact email, copy polish, and paragraph
+  justification.
 
 ### Changed
 
-- Merged the CE4CSID Toolkit Structure Guide into the Resources page: six parts and sixteen
-  numbered chapter spaces, with the current placeholder resources linked where they fit and the
-  searchable resource library kept below.
-- Updated the home and about pages to describe the six-part toolkit structure.
-- Public contact now uses the CE4CSID Working Group address (wg-ce4csid@csidnet.org) across the
-  site, contact form, issue templates, and governance documents.
+- Replaced the placeholder mark with the official CSID Network logo pack across the site, favicon,
+  and share images.
+- Corrected attribution to CSID Network / CE4CSID Working Group, built by Kabo Merapelo Onamile.
+- Public contact now uses the CE4CSID Working Group address (wg-ce4csid@csidnet.org).
+- Edited site copy to remove em dashes and formulaic phrasing. Body paragraphs are justified with
+  hyphenation and clean wrapping; headings, buttons, navigation, and form controls stay left-aligned.
+- Updated home and about pages to describe the six-part toolkit structure.
 
-## v2.0.1 — 2026-11-11
+### Fixed
 
-### Changed
+- Removed unrelated third-party organisation references from the site, documents, and repository
+  metadata.
 
-- Replaced the placeholder globe mark with the official CSID Network logo pack supplied with the
-  Identity Guidelines (full teal lockup, neutral-white footer lockup, globe favicon, social avatar).
-- Corrected attribution: the toolkit is CSID Network / CE4CSID Working Group content, built by
-  Kabo Merapelo Onamile. Removed unrelated third-party organisation references from the site,
-  documents, and repo metadata.
-- Contact now routes to the toolkit contact (wg-ce4csid@csidnet.org).
-
-## v2.0.0 — 2026-11-11
+## v2.0.0 - 2026-11-11
 
 Ground-up redesign on the CSID Network Identity Guidelines, in a new repository.
 
@@ -44,7 +46,7 @@ Ground-up redesign on the CSID Network Identity Guidelines, in a new repository.
 - Placeholder logo mark pending the official CSID Network logo.
 - Refactored all client code into ES modules with a shared `util.js`; checklist content split into `checklist-data.js`. Counts are derived from data, not hardcoded.
 
-### Fixed (hardening audit F1–F15)
+### Fixed (hardening audit F1 to F15)
 
 - Checklist accordion now wraps the button in an `h3` (valid HTML), not the reverse.
 - Category query params are validated against known categories.
@@ -60,7 +62,7 @@ Ground-up redesign on the CSID Network Identity Guidelines, in a new repository.
 - CI on push/PR (read-only permissions, pinned action majors, Node 20/22 matrix), CodeQL, gitleaks (code + full history), Dependabot, secret scanning + push protection, private vulnerability reporting, and branch protection on `main`.
 - Governance: SECURITY.md, CODE_OF_CONDUCT.md, .editorconfig, .env.example, issue/PR templates, CODEOWNERS, Conventional Commits.
 
-## v1.0.0 — 2026-07-17
+## v1.0.0 - 2026-07-17
 
 - Initial Option B build: branded GitHub Pages site, resources, downloads, interactive checklist, contact.
 - 2026-07-19: accessibility, SEO, and social-sharing improvements on the resources page.

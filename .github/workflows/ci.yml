@@ -5,6 +5,9 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  schedule:
+    # Weekly run to catch dependency drift and newly published advisories.
+    - cron: "0 3 * * 1"
 
 # Read-only by default; this workflow never writes to the repo.
 permissions:
