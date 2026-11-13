@@ -105,7 +105,7 @@ FOOTER = f'''<footer class="site-footer" role="contentinfo">
       <div class="footer-col">
         <h3>Contact</h3>
         <ul>
-          <li><a href="mailto:mkonamile@gmail.com">mkonamile@gmail.com</a></li>
+          <li><a href="mailto:wg-ce4csid@csidnet.org">wg-ce4csid@csidnet.org</a></li>
           <li><a href="contact.html">Contact form</a></li>
           <li><a href="{REPO}" target="_blank" rel="noopener">Project on GitHub</a></li>
         </ul>
@@ -198,20 +198,22 @@ index_body = '''
     <div class="two-col">
       <div class="reveal">
         <span class="pill-tag">How the toolkit is organised</span>
-        <h2>Four resource families. One interactive checklist.</h2>
-        <p style="margin-top:14px;">The toolkit groups its resources by how you will actually use them: Planning Guidance, Engagement Frameworks, Case Examples, and Templates. Alongside those documents sits an interactive Community Engagement Checklist that walks a research team through five planning stages.</p>
+        <h2>Six parts. Sixteen chapters. One interactive checklist.</h2>
+        <p style="margin-top:14px;">The toolkit is organised into six parts and sixteen chapters, from foundations and co-design through to policy, learning, and practical lessons. The interactive Community Engagement Checklist sits alongside the chapters, and the resource library links the current downloadable files.</p>
         <div class="hero-actions" style="margin-top:30px;">
-          <a href="resources.html" class="btn btn-lime">See toolkit resources</a>
+          <a href="resources.html#toolkit-outline" class="btn btn-lime">See toolkit structure</a>
           <a href="about.html" class="btn btn-secondary">Read about CE4CSID</a>
         </div>
       </div>
       <div class="card reveal">
         <h3>In this toolkit</h3>
         <ul class="numbered-steps" style="margin-top:14px;">
-          <li><div><h4>Planning Guidance</h4><p>Step by step guidance for building engagement into a CSID study from day one.</p></div></li>
-          <li><div><h4>Engagement Frameworks</h4><p>Structured approaches for mapping stakeholders and planning engagement activities.</p></div></li>
-          <li><div><h4>Case Examples</h4><p>Real world illustrations of engagement done well, and lessons from where it fell short.</p></div></li>
-          <li><div><h4>Templates</h4><p>Ready to adapt documents for consent, briefing, and engagement planning.</p></div></li>
+          <li><div><h4>Foundations of Community Engagement</h4><p>Introduce the toolkit, understand communities and their contexts, and agree principles for meaningful engagement.</p></div></li>
+          <li><div><h4>Planning and Co-Design</h4><p>Build engagement into project design, communicate participatively, and choose methods, activities, and tools.</p></div></li>
+          <li><div><h4>Responsible and Inclusive Engagement</h4><p>Cover ethics and inclusion, environmental considerations, and responsible data management and use.</p></div></li>
+          <li><div><h4>Communication and Knowledge Translation</h4><p>Communicate CSID data and evidence, address risk and trust, and share findings with community feedback.</p></div></li>
+          <li><div><h4>Policy Engagement, Monitoring and Sustainability</h4><p>Move from research to policy and practice, and monitor, evaluate, learn, and sustain engagement.</p></div></li>
+          <li><div><h4>Practical Application and Lessons Learned</h4><p>Use the implementation checklist and capture piloting experiences and lessons learned.</p></div></li>
         </ul>
       </div>
     </div>
@@ -221,7 +223,7 @@ index_body = '''
 <section class="section section-neutral">
   <div class="container">
     <div class="section-head center reveal">
-      <span class="pill-tag pill-blue">Browse by category</span>
+      <span class="pill-tag pill-blue">Resource library</span>
       <h2>Start with what your project needs now.</h2>
     </div>
     <div class="grid grid-4">
@@ -381,7 +383,7 @@ about_body = '''
       <p>Whether you are at the earliest design stage or already in the field, the toolkit meets you where you are.</p>
     </div>
     <ol class="numbered-steps reveal" style="max-width:780px; margin:0 auto;">
-      <li><div><h4>Read the Toolkit Resources</h4><p>Start with Planning Guidance if you are still shaping the project, or jump to the category that matches your current stage.</p></div></li>
+      <li><div><h4>Read the Toolkit Structure</h4><p>Start with the six-part outline if you are still shaping the project, or jump to the chapter that matches your current stage.</p></div></li>
       <li><div><h4>Download what your team needs</h4><p>Every resource and template is available on the Downloads page, ready to adapt to your specific study.</p></div></li>
       <li><div><h4>Work through the Checklist</h4><p>Use the interactive checklist to track engagement actions stage by stage, with notes and a printable export for your project file.</p></div></li>
       <li><div><h4>Reach out with questions</h4><p>Contact the CE4CSID Working Group or the toolkit builder if you need guidance specific to your project context.</p></div></li>
@@ -399,18 +401,149 @@ page("about.html",
      about_body)
 
 # ---------------------------------------------------------------- RESOURCES
-resources_body = '''
+# ---------------------------------------------------------------- RESOURCES
+# Structure from the CE4CSID Toolkit Structure Guide (six parts, sixteen chapters).
+# Each chapter is a stable space for the Working Group's final content.
+TOOLKIT_PARTS = [
+    {
+        "id": "part-1",
+        "label": "Part I",
+        "title": "Foundations of Community Engagement",
+        "chapters": [
+            {"n": 1, "title": "Introduction to the CE4CSID Toolkit", "links": [("About the toolkit", "about.html"), ("All downloads", "downloads.html")]},
+            {"n": 2, "title": "Understanding Communities and Their Contexts", "links": [("Stakeholder Mapping Framework", "downloads/framework-stakeholder-mapping.pdf")]},
+            {"n": 3, "title": "Principles of Meaningful Community Engagement", "links": [("Community Entry Protocol", "downloads/planning-guidance-community-entry-protocol.pdf")]},
+        ],
+    },
+    {
+        "id": "part-2",
+        "label": "Part II",
+        "title": "Planning and Co-Design",
+        "chapters": [
+            {"n": 4, "title": "Community Engagement Planning and Project Design", "links": [("Engaging Communities from Project Design", "downloads/planning-guidance-engaging-from-design.pdf"), ("Engagement Plan Template", "downloads/template-engagement-plan.docx")]},
+            {"n": 5, "title": "Participatory Communication and Co-Design", "links": [("Engagement Channel Selection Framework", "downloads/framework-engagement-channel-selection.pdf")]},
+            {"n": 6, "title": "Community Engagement Methods, Activities and Tools", "links": [("Engagement Channel Selection Framework", "downloads/framework-engagement-channel-selection.pdf"), ("Engagement Plan Template", "downloads/template-engagement-plan.docx")]},
+        ],
+    },
+    {
+        "id": "part-3",
+        "label": "Part III",
+        "title": "Responsible and Inclusive Engagement",
+        "chapters": [
+            {"n": 7, "title": "Ethical and Inclusive Community Engagement", "links": [("Consent and Briefing Note Template", "downloads/template-consent-briefing-note.docx"), ("Community Entry Protocol", "downloads/planning-guidance-community-entry-protocol.pdf")]},
+            {"n": 8, "title": "Environmental Considerations", "links": []},
+            {"n": 9, "title": "Responsible Data Management and Use", "links": [("Consent and Briefing Note Template", "downloads/template-consent-briefing-note.docx")]},
+        ],
+    },
+    {
+        "id": "part-4",
+        "label": "Part IV",
+        "title": "Communication and Knowledge Translation",
+        "chapters": [
+            {"n": 10, "title": "Communicating CSID Data and Scientific Evidence", "links": []},
+            {"n": 11, "title": "Risk Communication, Misinformation and Trust", "links": [("Engagement Channel Selection Framework", "downloads/framework-engagement-channel-selection.pdf")]},
+            {"n": 12, "title": "Communicating Research Findings and Facilitating Community Feedback", "links": [("Engagement Plan Template", "downloads/template-engagement-plan.docx")]},
+        ],
+    },
+    {
+        "id": "part-5",
+        "label": "Part V",
+        "title": "Policy Engagement, Monitoring and Sustainability",
+        "chapters": [
+            {"n": 13, "title": "From Research to Policy and Practice", "links": []},
+            {"n": 14, "title": "Monitoring, Evaluation, Learning and Sustainability", "links": [("Implementation checklist", "checklist.html")]},
+        ],
+    },
+    {
+        "id": "part-6",
+        "label": "Part VI",
+        "title": "Practical Application and Lessons Learned",
+        "chapters": [
+            {"n": 15, "title": "CE4CSID Implementation Checklist", "links": [("Open the implementation checklist", "checklist.html")]},
+            {"n": 16, "title": "Piloting the Toolkit: Experiences and Lessons Learned", "links": [("Flood response case example", "downloads/case-example-flood-response.pdf"), ("Vector control case example", "downloads/case-example-vector-control.pdf")]},
+        ],
+    },
+]
+
+
+def toolkit_link_html(label, href):
+    download = " download" if href.startswith("downloads/") else ""
+    return f'<a class="btn btn-ghost btn-sm chapter-link" href="{href}"{download}>{label}</a>'
+
+
+outline_cards = []
+parts_html = []
+for part in TOOLKIT_PARTS:
+    toc = "".join(
+        f'<li><a href="#chapter-{ch["n"]}">{ch["n"]}. {ch["title"]}</a></li>'
+        for ch in part["chapters"]
+    )
+    outline_cards.append(
+        f'<div class="card toolkit-part-card reveal">'
+        f'<span class="pill-tag">{part["label"]}</span>'
+        f'<h3><a href="#{part["id"]}">{part["title"]}</a></h3>'
+        f'<ol class="toolkit-toc">{toc}</ol>'
+        f"</div>"
+    )
+    chapters_html = []
+    for ch in part["chapters"]:
+        links = "".join(toolkit_link_html(label, href) for label, href in ch["links"])
+        links_html = f'<div class="chapter-links">{links}</div>' if links else ""
+        chapters_html.append(
+            f'<article class="toolkit-chapter reveal" id="chapter-{ch["n"]}" data-chapter="{ch["n"]}" aria-labelledby="chapter-{ch["n"]}-title">'
+            f'<div class="chapter-head"><span class="chapter-num" aria-hidden="true">{ch["n"]}</span>'
+            f'<h3 id="chapter-{ch["n"]}-title">{ch["title"]}</h3></div>'
+            f'<div class="chapter-content"><p class="chapter-placeholder">Final Working Group content for this chapter will be added here.</p></div>'
+            f"{links_html}"
+            f"</article>"
+        )
+    parts_html.append(
+        f'<section class="toolkit-part" id="{part["id"]}" aria-labelledby="{part["id"]}-title">'
+        f'<div class="toolkit-part-head reveal"><span class="pill-tag">{part["label"]}</span>'
+        f'<h2 id="{part["id"]}-title">{part["title"]}</h2></div>'
+        f'<div class="toolkit-chapters">{"".join(chapters_html)}</div>'
+        f"</section>"
+    )
+
+structure_outline = "".join(outline_cards)
+structure_parts = "".join(parts_html)
+
+resources_body = f'''
 <section class="hero hero-compact texture-topo">
   <div class="hero-blob hero-blob-lime" aria-hidden="true"></div>
   <div class="container">
-    <span class="eyebrow">Toolkit Resources</span>
-    <h1>Find what your project needs, when it needs it.</h1>
-    <p class="hero-lede">Every resource is grouped by purpose rather than by document type. Search across the whole toolkit, or filter by category to find what fits your project's current stage.</p>
+    <span class="eyebrow">Toolkit structure and resources</span>
+    <h1>The toolkit, organised chapter by chapter.</h1>
+    <p class="hero-lede">The toolkit follows the CE4CSID Working Group's six-part structure below. Each chapter is a ready space for final content; current placeholder resources are linked where they fit, and the searchable resource library remains underneath.</p>
   </div>
 </section>
 
-<section class="section section-neutral" style="padding-top:8px;">
+<section class="section section-white" id="toolkit-outline">
   <div class="container">
+    <div class="section-head center reveal">
+      <span class="pill-tag">Toolkit structure</span>
+      <h2>Six parts, sixteen chapters.</h2>
+      <p>Use this outline as the map for the toolkit. Final chapter content can be added into the matching space without changing the page layout or links.</p>
+    </div>
+    <div class="toolkit-outline-grid">
+      {structure_outline}
+    </div>
+  </div>
+</section>
+
+<section class="section section-neutral">
+  <div class="container">
+    {structure_parts}
+  </div>
+</section>
+
+<section class="section section-white" id="resource-library">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="pill-tag pill-blue">Resource library</span>
+      <h2>Search the current downloadable resources.</h2>
+      <p>Search across the whole library, or filter by category to find what fits your project's current stage.</p>
+    </div>
 
     <div class="resource-toolbar reveal">
       <div class="search-wrap">
@@ -444,7 +577,7 @@ resources_body = '''
   <div class="container reveal">
     <span class="pill-tag">Missing something</span>
     <h2>Have toolkit content to contribute or a resource we should add?</h2>
-    <p>If you are part of the CE4CSID Working Group with content ready to share, get in touch and it will be added to the toolkit.</p>
+    <p>If you are part of the CE4CSID Working Group with content ready to share, get in touch and it will be added to the matching chapter.</p>
     <a href="contact.html" class="btn btn-lime">Contact the toolkit team</a>
   </div>
 </section>
@@ -452,7 +585,7 @@ resources_body = '''
 
 page("resources.html",
      "Toolkit Resources | CE4CSID Community Engagement Toolkit",
-     "Search and filter the CE4CSID toolkit's practical resources: Planning Guidance, Engagement Frameworks, Case Examples, and Templates.",
+     "The CE4CSID toolkit structure: six parts and sixteen chapters, plus searchable resources, frameworks, case examples, and templates.",
      resources_body,
      scripts=("main.js", "resources.js"))
 
@@ -640,12 +773,12 @@ contact_body = '''
         <h2 style="margin-bottom:22px;">Toolkit contact</h2>
         <div class="card" style="margin-bottom:18px;">
           <h3 style="font-size:1.05rem;">CE4CSID Working Group</h3>
-          <p style="margin-top:8px;">Toolkit content and resources are developed by the CE4CSID Working Group. Use the form to share feedback or content suggestions.</p>
+          <p style="margin-top:8px;">Toolkit content and resources are developed by the CE4CSID Working Group. Use the form or the Working Group email for feedback and content suggestions.</p>
+          <p style="margin-top:8px;">Email: <a href="mailto:wg-ce4csid@csidnet.org" style="font-weight:650;">wg-ce4csid@csidnet.org</a></p>
         </div>
         <div class="card" style="margin-bottom:18px;">
           <h3 style="font-size:1.05rem;">Toolkit development and maintenance</h3>
           <p style="margin-top:8px;">Kabo Merapelo Onamile, Digital Health Developer</p>
-          <p>Email: <a href="mailto:mkonamile@gmail.com" style="font-weight:650;">mkonamile@gmail.com</a></p>
         </div>
         <div class="callout">
           <strong>Response times:</strong> the toolkit team aims to respond within a few working days. For urgent matters, please email directly rather than using the form.

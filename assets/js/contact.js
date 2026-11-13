@@ -10,7 +10,7 @@ import { showToast } from "./util.js";
 
 /** Optional live Formspree endpoint, e.g. "https://formspree.io/f/xxxxxxxx". */
 const FORM_ENDPOINT = "";
-const CONTACT_EMAIL = "mkonamile@gmail.com";
+const CONTACT_EMAIL = "wg-ce4csid@csidnet.org";
 
 /**
  * @typedef {Object} ContactFields

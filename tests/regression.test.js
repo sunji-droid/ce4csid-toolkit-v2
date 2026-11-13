@@ -157,3 +157,60 @@ test("F5: pages load scripts as ES modules (no classic-script/export mismatch)",
   loadHTML("<body></body>");
   assert.equal(util.esc("<"), "&lt;");
 });
+
+test("Layout guide: six parts and sixteen chapters are present as content spaces", () => {
+  const html = read("resources.html");
+  const parts = [
+    "Foundations of Community Engagement",
+    "Planning and Co-Design",
+    "Responsible and Inclusive Engagement",
+    "Communication and Knowledge Translation",
+    "Policy Engagement, Monitoring and Sustainability",
+    "Practical Application and Lessons Learned",
+  ];
+  const chapters = [
+    "Introduction to the CE4CSID Toolkit",
+    "Understanding Communities and Their Contexts",
+    "Principles of Meaningful Community Engagement",
+    "Community Engagement Planning and Project Design",
+    "Participatory Communication and Co-Design",
+    "Community Engagement Methods, Activities and Tools",
+    "Ethical and Inclusive Community Engagement",
+    "Environmental Considerations",
+    "Responsible Data Management and Use",
+    "Communicating CSID Data and Scientific Evidence",
+    "Risk Communication, Misinformation and Trust",
+    "Communicating Research Findings and Facilitating Community Feedback",
+    "From Research to Policy and Practice",
+    "Monitoring, Evaluation, Learning and Sustainability",
+    "CE4CSID Implementation Checklist",
+    "Piloting the Toolkit: Experiences and Lessons Learned",
+  ];
+  for (const part of parts) assert.ok(html.includes(part), "missing part: " + part);
+  for (const chapter of chapters) assert.ok(html.includes(chapter), "missing chapter: " + chapter);
+  assert.equal((html.match(/data-chapter="/g) || []).length, 16);
+  assert.ok(html.includes('id="toolkit-outline"'));
+  assert.ok(html.includes('id="resource-library"'));
+});
+
+test("Public contact email is the CE4CSID Working Group address", () => {
+  const email = "wg-ce4csid@csidnet.org";
+  for (const f of [
+    "assets/js/contact.js",
+    "contact.html",
+    "index.html",
+    "about.html",
+    "resources.html",
+    "downloads.html",
+    "checklist.html",
+    "404.html",
+    ".github/ISSUE_TEMPLATE/config.yml",
+    "CONTRIBUTING.md",
+    "SECURITY.md",
+    "CODE_OF_CONDUCT.md",
+  ]) {
+    const src = read(f);
+    assert.ok(src.includes(email), f + " should use the Working Group email");
+    assert.ok(!src.includes("mkonamile@gmail.com"), f + " should not use the old personal email");
+  }
+});
