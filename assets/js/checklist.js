@@ -271,14 +271,14 @@ export function updateProgressUI(state) {
       '.checklist-stage[data-stage-id="' + stage.id + '"] .stage-progress'
     );
     if (el) {
-      el.textContent = st.done === st.total ? "Complete ✓" : st.done + " of " + st.total;
+      el.textContent = st.done === st.total ? "Complete" : st.done + " of " + st.total;
       el.classList.toggle("is-complete", st.done === st.total);
     }
   }
 
   if (stats.pct === 100 && !state.celebrated) {
     state.celebrated = true;
-    showToast("All " + ACTION_COUNT + " actions complete — engagement plan ready. 🎉");
+    showToast("All " + ACTION_COUNT + " actions complete. Engagement plan ready.");
   }
   if (stats.pct < 100 && state.celebrated) {
     state.celebrated = false;

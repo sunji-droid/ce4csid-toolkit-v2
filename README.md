@@ -1,4 +1,4 @@
-# CE4CSID Community Engagement Toolkit — v2
+# CE4CSID Community Engagement Toolkit
 
 [![CI](https://github.com/sunji-droid/ce4csid-toolkit-v2/actions/workflows/ci.yml/badge.svg)](https://github.com/sunji-droid/ce4csid-toolkit-v2/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/sunji-droid/ce4csid-toolkit-v2/actions/workflows/codeql.yml/badge.svg)](https://github.com/sunji-droid/ce4csid-toolkit-v2/actions/workflows/codeql.yml)
@@ -8,7 +8,7 @@ Practical resources and guidelines for integrating community engagement into **C
 
 **Live site:** <https://sunji-droid.github.io/ce4csid-toolkit-v2/>
 
-This is a ground-up redesign built on the **CSID Network Identity Guidelines** (teal / lime / blue / purple / red / yellow palette, Inter Tight + Inter typography). The visitor-facing site is **zero-runtime-dependency**: plain HTML, CSS, and vanilla ES modules, served straight from GitHub Pages. All tooling in this repo (lint, tests, types) is **dev-only** and never shipped to visitors.
+The site is built on the **CSID Network Identity Guidelines** (teal / lime / blue / purple / red / yellow palette, Inter Tight + Inter typography). The visitor-facing site is **zero-runtime-dependency**: plain HTML, CSS, and vanilla ES modules, served straight from GitHub Pages. All tooling in this repo (lint, tests, types) is **dev-only** and never shipped to visitors.
 
 > **Status:** the downloadable documents are clearly-marked placeholders pending the Working Group's final content. The site structure, links, and search will not need to change when final files are dropped in.
 
@@ -16,14 +16,14 @@ This is a ground-up redesign built on the **CSID Network Identity Guidelines** (
 
 ## What's new in v2
 
-- **Full CSID brand system** — exact palette and accessible colour pairings; self-hosted Inter Tight (headings) and Inter (body), so the site renders correctly even offline.
+- **Full CSID brand system**: exact palette and accessible colour pairings; self-hosted Inter Tight (headings) and Inter (body), so the site renders correctly even offline.
 - **Live resource search + category filters** with deep-linkable URLs (`?category=templates`, `?q=consent`).
-- **Single source of truth** — `assets/js/resources-data.js` drives both Resources and Downloads. Add a resource once, it appears everywhere.
+- **Single source of truth**: `assets/js/resources-data.js` drives both Resources and Downloads. Add a resource once, it appears everywhere.
 - **Download-all zip** of every toolkit file.
-- **Upgraded checklist** — project name on the printed record, expand/collapse all, JSON backup export & import, per-stage completion states, and a completion celebration. Progress auto-saves to the device.
-- **Contact form that works with no backend** — composes a pre-filled email by default; optional Formspree endpoint for silent collection.
-- **Accessibility & SEO** — skip links, semantic landmarks, `aria-current`, focus-visible rings, reduced-motion support, Open Graph + Twitter cards, canonical URLs, `sitemap.xml`, `robots.txt`, branded share image.
-- **Quality & security** — ES-module refactor, strict type checking, 53 automated tests (≥80% coverage enforced), CI on every push/PR, CodeQL, gitleaks, Dependabot, secret scanning + push protection, and branch protection. See [Security](#security).
+- **Upgraded checklist**: project name on the printed record, expand/collapse all, JSON backup export & import, per-stage completion states, and a completion celebration. Progress auto-saves to the device.
+- **Contact form that works with no backend**: composes a pre-filled email by default; optional Formspree endpoint for silent collection.
+- **Accessibility & SEO**: skip links, semantic landmarks, `aria-current`, focus-visible rings, reduced-motion support, Open Graph + Twitter cards, canonical URLs, `sitemap.xml`, `robots.txt`, branded share image.
+- **Quality & security**: ES-module refactor, strict type checking, 57 automated tests (≥80% coverage enforced), CI on every push/PR, CodeQL, gitleaks, Dependabot, secret scanning + push protection, and branch protection. See [Security](#security).
 
 ## Requirements
 
@@ -32,7 +32,7 @@ This is a ground-up redesign built on the **CSID Network Identity Guidelines** (
 **To develop or run the checks:**
 
 - [Node.js](https://nodejs.org) **>= 20.19.0** and npm (CI runs on Node 20 and 22).
-- [Python 3](https://www.python.org) — only for the static-page and zip generators (standard library only).
+- [Python 3](https://www.python.org): only for the static-page and zip generators (standard library only).
 
 ## Quick start (run the site locally)
 
@@ -51,7 +51,7 @@ Install the dev-only tooling once (uses the committed lockfile):
 npm ci
 ```
 
-Run the full quality gate — lint, format check, type check, tests with coverage, and a dependency audit:
+Run the full quality gate: lint, format check, type check, tests with coverage, and a dependency audit:
 
 ```bash
 npm run check
@@ -61,8 +61,8 @@ Individual commands (all run verbatim on a fresh clone):
 
 ```bash
 npm run lint          # ESLint (zero errors, no rule disabling)
-npm run format        # Prettier — write
-npm run format:check  # Prettier — check only
+npm run format        # Prettier: write
+npm run format:check  # Prettier: check only
 npm run typecheck     # TypeScript strict checkJs over assets/js
 npm test              # node:test unit + regression suite
 npm run test:coverage # tests + c8 coverage gate (>= 80% lines/branches/functions/statements)
@@ -71,32 +71,32 @@ npm run build:pages   # regenerate the HTML pages from tools/build_pages.py
 npm run build:zip     # rebuild downloads/ce4csid-toolkit-all-resources.zip
 ```
 
-> The HTML pages are **generated**. Edit `tools/build_pages.py` (shared head/header/footer + page bodies) and run `npm run build:pages` — do not hand-edit the `.html` files.
+> The HTML pages are **generated**. Edit `tools/build_pages.py` (shared head/header/footer + page bodies) and run `npm run build:pages`: do not hand-edit the `.html` files.
 
 ## Running tests
 
-The suite uses the built-in [`node:test`](https://nodejs.org/api/test.html) runner with [jsdom](https://github.com/jsdom/jsdom) to load the real generated pages. Unit tests use **mocked timers and a stubbed `fetch`/`FileReader` — no real network or clock**.
+The suite uses the built-in [`node:test`](https://nodejs.org/api/test.html) runner with [jsdom](https://github.com/jsdom/jsdom) to load the real generated pages. Unit tests use **mocked timers and a stubbed `fetch`/`FileReader`: no real network or clock**.
 
 ```bash
 npm test              # run all tests
 npm run test:coverage # run with the 80% coverage floor
 ```
 
-There is one **regression test per fixed bug** from the hardening audit (`tests/regression.test.js`, named F1–F15), so a change that reintroduces a bug fails loudly with its finding id.
+There is one **regression test per fixed bug** from the hardening audit (`tests/regression.test.js`, named F1 to F15), so a change that reintroduces a bug fails loudly with its finding id.
 
 ## Configuration
 
 - **Add / update a resource:** put the file in `downloads/`, add one entry to `assets/js/resources-data.js`, then `npm run build:zip`. It appears on Resources and Downloads automatically.
 - **Contact form:** by default it opens the visitor's email app pre-filled (zero setup). To collect submissions silently, create a free form at [formspree.io](https://formspree.io) and set `FORM_ENDPOINT` in `assets/js/contact.js`.
 - **Checklist content:** stages and actions live in `assets/js/checklist-data.js`; counts are derived from the data, never hardcoded.
-- **Official logo:** see [Swap in the official CSID Network logo](#swap-in-the-official-csid-network-logo).
+- **Official logo:** see [Official CSID Network logo](#official-csid-network-logo).
 - **Environment:** copy `.env.example` to `.env` for any local secrets. `.env` is git-ignored; never commit real credentials.
 
 ## Project structure
 
 ```
 ├── index.html / about.html / resources.html / downloads.html
-├── checklist.html / contact.html / 404.html        # generated — edit tools/build_pages.py
+├── checklist.html / contact.html / 404.html        # generated: edit tools/build_pages.py
 ├── assets/
 │   ├── css/style.css            # design system + all component styles
 │   ├── js/
@@ -183,7 +183,7 @@ Text uses only the darkest teal (on light) or neutral white (on dark), per the g
 
 The repo is hardened with: CI quality gates (Node 20/22), CodeQL (`security-extended`), gitleaks (code + full history), Dependabot alerts + security + version updates, secret scanning + push protection, private vulnerability reporting, and branch protection on `main` (passing checks required, 0 approvals for the solo maintainer, no force-push/deletion, linear history).
 
-To report a vulnerability, **do not open a public issue** — see [SECURITY.md](SECURITY.md) for private reporting.
+To report a vulnerability, **do not open a public issue**: see [SECURITY.md](SECURITY.md) for private reporting.
 
 ## Credits & licence
 
