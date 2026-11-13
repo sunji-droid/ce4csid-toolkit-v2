@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.1.1 - 2026-11-13
+
+### Fixed
+
+- Made the all-resources zip deterministic so rebuilding it on a fresh clone does not create a
+  timestamp-only diff.
+- Added a CI step to verify that generated pages and the download zip match the committed files.
+
 ## v2.1.0 - 2026-11-13
 
 ### Added
