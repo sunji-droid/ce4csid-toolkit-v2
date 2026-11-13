@@ -11,6 +11,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 DOWNLOADS = os.path.normpath(os.path.join(HERE, "..", "downloads"))
 OUT = os.path.join(DOWNLOADS, "ce4csid-toolkit-all-resources.zip")
 
+# Fixed timestamp so rebuilding the zip on a fresh clone does not create a diff.
+ZIP_DATE_TIME = (2026, 11, 13, 0, 0, 0)
+
 
 def main():
     files = sorted(
@@ -19,7 +22,11 @@ def main():
     )
     with zipfile.ZipFile(OUT, "w", zipfile.ZIP_DEFLATED) as z:
         for f in files:
-            z.write(os.path.join(DOWNLOADS, f), f)
+            info = zipfile.ZipInfo(f, date_time=ZIP_DATE_TIME)
+            info.compress_type = zipfile.ZIP_DEFLATED
+            info.external_attr = 0o644 << 16
+            with open(os.path.join(DOWNLOADS, f), "rb") as src:
+                z.writestr(info, src.read())
     print(f"Wrote {OUT} with {len(files)} files.")
 
 

@@ -41,6 +41,12 @@ jobs:
       - name: Lint, format, typecheck, tests (coverage >= 80%), audit
         run: npm run check
 
+      - name: Verify generated pages and download zip are committed
+        run: |
+          npm run build:pages
+          npm run build:zip
+          git diff --exit-code
+
   secret-scan:
     name: Secret scan (full history)
     runs-on: ubuntu-latest

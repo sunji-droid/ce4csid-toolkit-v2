@@ -1,6 +1,6 @@
 {
   "name": "ce4csid-toolkit-v2",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "private": true,
   "description": "CE4CSID Community Engagement Toolkit. Static site with a zero-runtime-dependency front end. Dev tooling only.",
   "type": "module",
