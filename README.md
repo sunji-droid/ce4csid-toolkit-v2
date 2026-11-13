@@ -143,6 +143,14 @@ rules are recorded in `assets/images/LOGO-SOURCE.md`.
 Per the style guide, do not recolour the globe icon with other brand colours; use the logo in
 full colour, brand teal, black, or white only, and keep clear space around the mark.
 
+## Toolkit structure (layout guide)
+
+The Resources page follows the CE4CSID Toolkit Structure Guide: **six parts and sixteen numbered
+chapters**. Each chapter is a stable content space (`#chapter-1` … `#chapter-16`) so final Working
+Group content can be pasted into the matching chapter without changing the layout. Current
+placeholder resources are linked from the chapters where they fit, and the searchable resource
+library remains below the outline.
+
 ## Replace placeholder content
 
 Drop the Working Group's final files into `downloads/` using the **same filenames**, and the links, search, and zip keep working. Then:

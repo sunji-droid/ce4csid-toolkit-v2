@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased
+
+### Changed
+
+- Merged the CE4CSID Toolkit Structure Guide into the Resources page: six parts and sixteen
+  numbered chapter spaces, with the current placeholder resources linked where they fit and the
+  searchable resource library kept below.
+- Updated the home and about pages to describe the six-part toolkit structure.
+- Public contact now uses the CE4CSID Working Group address (wg-ce4csid@csidnet.org) across the
+  site, contact form, issue templates, and governance documents.
+
 ## v2.0.1 — 2026-11-11
 
 ### Changed
@@ -9,7 +20,7 @@
 - Corrected attribution: the toolkit is CSID Network / CE4CSID Working Group content, built by
   Kabo Merapelo Onamile. Removed unrelated third-party organisation references from the site,
   documents, and repo metadata.
-- Contact now routes to the toolkit contact (mkonamile@gmail.com).
+- Contact now routes to the toolkit contact (wg-ce4csid@csidnet.org).
 
 ## v2.0.0 — 2026-11-11
 

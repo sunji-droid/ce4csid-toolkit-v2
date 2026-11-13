@@ -26,7 +26,7 @@ Project maintainers may remove, edit, or reject contributions, comments, issues,
 
 ## Reporting
 
-If you experience or witness unacceptable behaviour, contact the maintainer at **mkonamile@gmail.com**. Reports will be reviewed promptly and handled as confidentially as possible.
+If you experience or witness unacceptable behaviour, contact the maintainer at **wg-ce4csid@csidnet.org**. Reports will be reviewed promptly and handled as confidentially as possible.
 
 ## Attribution
 

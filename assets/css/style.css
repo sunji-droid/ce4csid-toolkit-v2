@@ -1971,3 +1971,114 @@ a.card:hover {
     color: var(--ink);
   }
 }
+
+/* ---------- Toolkit structure (layout guide) ---------- */
+.toolkit-outline-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+.toolkit-part-card h3 {
+  margin-top: 12px;
+  font-size: 1.08rem;
+}
+.toolkit-part-card h3 a {
+  color: var(--ink);
+  text-decoration: none;
+}
+.toolkit-part-card h3 a:hover {
+  color: var(--csid-teal);
+  text-decoration: underline;
+}
+.toolkit-toc {
+  margin: 14px 0 0;
+  padding-left: 18px;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+.toolkit-toc li {
+  margin-bottom: 8px;
+}
+.toolkit-toc a {
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+.toolkit-toc a:hover {
+  color: var(--csid-teal);
+  text-decoration: underline;
+}
+.toolkit-part {
+  margin-bottom: 44px;
+}
+.toolkit-part:last-child {
+  margin-bottom: 0;
+}
+.toolkit-part-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.toolkit-part-head h2 {
+  font-size: 1.5rem;
+}
+.toolkit-chapters {
+  display: grid;
+  gap: 18px;
+}
+.toolkit-chapter {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 24px;
+}
+.chapter-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.chapter-num {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--csid-teal);
+  color: var(--white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-head);
+  font-weight: 700;
+}
+.toolkit-chapter h3 {
+  font-size: 1.12rem;
+  line-height: 1.35;
+  padding-top: 6px;
+}
+.chapter-content {
+  margin-top: 12px;
+}
+.chapter-placeholder {
+  color: var(--ink-soft);
+  font-style: italic;
+}
+.chapter-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+@media (max-width: 940px) {
+  .toolkit-outline-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .toolkit-outline-grid {
+    grid-template-columns: 1fr;
+  }
+  .toolkit-chapter {
+    padding: 20px;
+  }
+}

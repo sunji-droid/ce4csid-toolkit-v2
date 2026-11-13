@@ -13,7 +13,7 @@ Only the latest release receives security fixes.
 
 Do not open a public issue for a security problem.
 
-Use the **Report a vulnerability** button on the [Security tab](https://github.com/sunji-droid/ce4csid-toolkit-v2/security/advisories) of this repository, or email **mkonamile@gmail.com** with the subject line `[CE4CSID Toolkit Security]`.
+Use the **Report a vulnerability** button on the [Security tab](https://github.com/sunji-droid/ce4csid-toolkit-v2/security/advisories) of this repository, or email **wg-ce4csid@csidnet.org** with the subject line `[CE4CSID Toolkit Security]`.
 
 Include:
 

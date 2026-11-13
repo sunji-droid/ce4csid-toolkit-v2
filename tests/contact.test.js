@@ -17,7 +17,7 @@ const fields = {
 
 test("buildMailto encodes subject and body and defaults the reason", () => {
   const url = buildMailto(fields);
-  assert.ok(url.startsWith("mailto:mkonamile@gmail.com?"));
+  assert.ok(url.startsWith("mailto:wg-ce4csid@csidnet.org?"));
   assert.ok(
     url.includes("subject=" + encodeURIComponent("[CE4CSID Toolkit] Feedback on a resource"))
   );
