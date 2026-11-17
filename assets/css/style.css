@@ -1826,6 +1826,8 @@ a.card:hover {
   font-size: 0.95rem;
   font-weight: 600;
   margin: 0;
+  text-align: left;
+  hyphens: manual;
 }
 .footer-bottom {
   display: flex;
