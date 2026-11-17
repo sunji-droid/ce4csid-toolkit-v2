@@ -89,7 +89,7 @@ There is one **regression test per fixed bug** from the hardening audit (`tests/
 - **Add / update a resource:** put the file in `downloads/`, add one entry to `assets/js/resources-data.js`, then `npm run build:zip`. It appears on Resources and Downloads automatically.
 - **Contact form:** by default it opens the visitor's email app pre-filled (zero setup). To collect submissions silently, create a free form at [formspree.io](https://formspree.io) and set `FORM_ENDPOINT` in `assets/js/contact.js`.
 - **Checklist content:** stages and actions live in `assets/js/checklist-data.js`; counts are derived from the data, never hardcoded.
-- **Official logo:** see [Official CSID Network logo](#official-csid-network-logo).
+- **Toolkit icon and official logo:** see [Toolkit icon and official CSID Network logo](#toolkit-icon-and-official-csid-network-logo).
 - **Environment:** copy `.env.example` to `.env` for any local secrets. `.env` is git-ignored; never commit real credentials.
 
 ## Project structure
@@ -109,7 +109,7 @@ There is one **regression test per fixed bug** from the hardening audit (`tests/
 │   │   ├── checklist.js         # interactive checklist + backup
 │   │   └── contact.js           # mailto / Formspree handling
 │   ├── fonts/                   # self-hosted Inter + Inter Tight (woff2)
-│   └── images/                  # official CSID logo, favicon, share image, LOGO-SOURCE.md
+│   └── images/                  # toolkit icon, official CSID logo, favicon, share image, LOGO-SOURCE.md
 ├── downloads/                   # toolkit PDFs, DOCX, and the all-in-one zip
 ├── tests/                       # node:test unit + regression suite (jsdom)
 ├── tools/
@@ -133,15 +133,17 @@ git push -u origin main
 
 The site will be live at `https://<you>.github.io/ce4csid-toolkit-v2/`. If you choose a different repo name, update `BASE`/`REPO` in `tools/build_pages.py`, then `npm run build:pages`, and update `sitemap.xml`, `robots.txt`, and the footer GitHub link.
 
-## Official CSID Network logo
+## Toolkit icon and official CSID Network logo
 
-The site uses the **official CSID Network artwork** from the Identity Guidelines logo pack:
-the full teal lockup in the header, the neutral-white lockup in the footer, the globe logomark
-as the favicon, and the official social avatar for the apple-touch icon. Provenance and brand
-rules are recorded in `assets/images/LOGO-SOURCE.md`.
+The site header, footer brand block, favicon, apple touch icon, and share image use a separate
+**CE4CSID Toolkit product icon** so the toolkit is not confused with the whole CSID Network.
+The footer support line uses the **official CSID Network artwork** from the Identity Guidelines
+logo pack, with the line "The CE4CSID Toolkit, supported by the CSID Network". Provenance and
+brand rules are recorded in `assets/images/LOGO-SOURCE.md`.
 
-Per the style guide, do not recolour the globe icon with other brand colours; use the logo in
-full colour, brand teal, black, or white only, and keep clear space around the mark.
+Per the style guide, do not recolour the CSID Network globe icon with other brand colours; use
+the CSID Network logo in full colour, brand teal, black, or white only, and keep clear space
+around the mark.
 
 ## Toolkit structure (layout guide)
 

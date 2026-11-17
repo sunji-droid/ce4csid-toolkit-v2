@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Separate CE4CSID Toolkit product icon for the site header, footer brand block, favicon,
+  apple touch icon, and share image.
+- Footer support line with the official CSID Network logo: "The CE4CSID Toolkit, supported by
+  the CSID Network".
+
 ## v2.1.1 - 2026-11-13
 
 ### Fixed

@@ -247,3 +247,41 @@ test("Body paragraphs are justified with hyphenation, while short UI text stays 
   assert.ok(/p\s*\{[^}]*text-align:\s*justify[^}]*hyphens:\s*auto/s.test(css));
   assert.ok(/\.form-note,[\s\S]*?text-align:\s*left;/.test(css));
 });
+
+test("Toolkit icon is separate from the official CSID Network footer logo", () => {
+  for (const f of [
+    "index.html",
+    "about.html",
+    "resources.html",
+    "downloads.html",
+    "checklist.html",
+    "contact.html",
+    "404.html",
+  ]) {
+    const html = read(f);
+    assert.ok(
+      html.includes('src="assets/images/toolkit-icon.svg"'),
+      f + " should use the toolkit icon"
+    );
+    assert.ok(html.includes('alt="CE4CSID Toolkit icon"'), f + " should label the toolkit icon");
+    assert.ok(
+      html.includes("The CE4CSID Toolkit, supported by the CSID Network"),
+      f + " should carry the footer support line"
+    );
+    assert.ok(
+      html.includes('src="assets/images/logo-white.svg"'),
+      f + " should use the official CSID logo in the footer"
+    );
+    assert.ok(
+      html.includes('href="assets/images/favicon.svg"'),
+      f + " should use the toolkit favicon"
+    );
+    assert.ok(
+      html.includes("assets/images/og-image.png"),
+      f + " should use the toolkit share image"
+    );
+  }
+  const css = read("assets/css/style.css");
+  assert.ok(/\.toolkit-icon\s*\{/.test(css));
+  assert.ok(/\.footer-support\s*\{/.test(css));
+});
