@@ -315,12 +315,28 @@ a.card:hover {
   width: auto;
   flex: none;
 }
+.toolkit-icon {
+  display: block;
+  width: 42px;
+  height: 42px;
+  flex: none;
+  border-radius: 12px;
+}
 .site-footer .brand-logo {
+  height: 44px;
+}
+.site-footer .toolkit-icon {
+  width: 44px;
   height: 44px;
 }
 @media (max-width: 640px) {
   .brand-logo {
     height: 30px;
+  }
+  .toolkit-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
   }
   .brand-text span {
     display: none;
@@ -1793,6 +1809,25 @@ a.card:hover {
 }
 .footer-col a:hover {
   color: var(--csid-lime);
+}
+.footer-support {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 24px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+.footer-support .brand-logo {
+  height: 36px;
+}
+.footer-support p {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0;
+  text-align: left;
+  hyphens: manual;
 }
 .footer-bottom {
   display: flex;

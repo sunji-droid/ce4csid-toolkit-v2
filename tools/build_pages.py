@@ -11,10 +11,11 @@ ROOT = os.path.normpath(os.path.join(HERE, ".."))
 BASE = "https://sunji-droid.github.io/ce4csid-toolkit-v2"
 REPO = "https://github.com/sunji-droid/ce4csid-toolkit-v2"
 
-# Official CSID Network artwork from the Identity Guidelines logo pack.
+# The toolkit has its own product icon so it is not confused with the CSID Network.
+# The official CSID Network artwork is used only in the footer support line.
 # See assets/images/LOGO-SOURCE.md. Do not recolour or redraw the globe mark.
-LOGO_HEADER = '''<img class="brand-logo" src="assets/images/logo.svg" alt="" width="760" height="212">'''
-LOGO_FOOTER = '''<img class="brand-logo" src="assets/images/logo-white.svg" alt="" width="760" height="212">'''
+TOOLKIT_ICON = '''<img class="toolkit-icon" src="assets/images/toolkit-icon.svg" alt="CE4CSID Toolkit icon" width="512" height="512">'''
+LOGO_FOOTER = '''<img class="brand-logo" src="assets/images/logo-white.svg" alt="CSID Network logo" width="760" height="212">'''
 
 NAV = [
     ("index.html", "Home", ""),
@@ -66,8 +67,8 @@ def header(active):
     links_html = "\n".join(links)
     return f'''<header class="site-header" role="banner">
   <div class="container">
-    <a href="index.html" class="brand" aria-label="CSID Network, CE4CSID Community Engagement Toolkit home">
-      {LOGO_HEADER}
+    <a href="index.html" class="brand" aria-label="CE4CSID Community Engagement Toolkit home">
+      {TOOLKIT_ICON}
       <span class="brand-text">CE4CSID<span>Community Engagement Toolkit</span></span>
     </a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="primary-navigation" aria-label="Toggle navigation menu">
@@ -87,8 +88,8 @@ FOOTER = f'''<footer class="site-footer" role="contentinfo">
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="index.html" class="brand" aria-label="CSID Network, CE4CSID Community Engagement Toolkit home">
-          {LOGO_FOOTER}
+        <a href="index.html" class="brand" aria-label="CE4CSID Community Engagement Toolkit home">
+          {TOOLKIT_ICON}
           <span class="brand-text">CE4CSID<span>Community Engagement Toolkit</span></span>
         </a>
         <p>Practical resources and guidance for integrating community engagement into Climate Sensitive Infectious Disease research, developed by the CE4CSID Working Group.</p>
@@ -110,6 +111,10 @@ FOOTER = f'''<footer class="site-footer" role="contentinfo">
           <li><a href="{REPO}" target="_blank" rel="noopener">Project on GitHub</a></li>
         </ul>
       </div>
+    </div>
+    <div class="footer-support">
+      {LOGO_FOOTER}
+      <p>The CE4CSID Toolkit, supported by the CSID Network</p>
     </div>
     <div class="footer-bottom">
       <span>&copy; <span data-current-year>2026</span> CSID Network / CE4CSID Working Group.</span>
