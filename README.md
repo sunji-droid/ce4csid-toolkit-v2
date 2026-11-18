@@ -90,6 +90,9 @@ There is one **regression test per fixed bug** from the hardening audit (`tests/
 - **Contact form:** by default it opens the visitor's email app pre-filled (zero setup). To collect submissions silently, create a free form at [formspree.io](https://formspree.io) and set `FORM_ENDPOINT` in `assets/js/contact.js`.
 - **Checklist content:** stages and actions live in `assets/js/checklist-data.js`; counts are derived from the data, never hardcoded.
 - **Toolkit icon and official logo:** see [Toolkit icon and official CSID Network logo](#toolkit-icon-and-official-csid-network-logo).
+- **Share images:** `python3 tools/build_share_images.py` regenerates `assets/images/og-image.png` and
+  `ce4csid-social-preview.png` from the toolkit icon (dev only, needs cairosvg and Pillow). Upload the
+  second file by hand in Settings, Social preview, since GitHub has no API for it.
 - **Environment:** copy `.env.example` to `.env` for any local secrets. `.env` is git-ignored; never commit real credentials.
 
 ## Project structure
@@ -136,7 +139,8 @@ The site will be live at `https://<you>.github.io/ce4csid-toolkit-v2/`. If you c
 ## Toolkit icon and official CSID Network logo
 
 The site header, footer brand block, favicon, apple touch icon, and share image use a separate
-**CE4CSID Toolkit product icon** so the toolkit is not confused with the whole CSID Network.
+**CE4CSID Toolkit product icon**: a CE4 monogram drawn from Inter Tight, in brand teal and lime,
+with no enclosing ring because a circled CE is the EU conformity marking.
 The footer support line uses the **official CSID Network artwork** from the Identity Guidelines
 logo pack, with the line "The CE4CSID Toolkit, supported by the CSID Network". Provenance and
 brand rules are recorded in `assets/images/LOGO-SOURCE.md`.

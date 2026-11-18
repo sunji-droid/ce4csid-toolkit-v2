@@ -1,5 +1,19 @@
 # Changelog
 
+## v2.1.3 - 2026-11-18
+
+### Changed
+
+- Toolkit icon is now a CE4 monogram, drawn from Inter Tight in the site fonts and shipped as
+  vector paths, so no font is needed when it renders. Applied to the header, footer brand block,
+  favicon, apple touch icon, and share images.
+- Added `tools/build_share_images.py` so the share images can be regenerated from the icon.
+
+### Notes
+
+- The monogram deliberately has no enclosing ring, because a circled CE is the EU conformity
+  marking. The 4 in brand lime makes the mark specific to this toolkit.
+
 ## v2.1.2 - 2026-11-17
 
 ### Added
