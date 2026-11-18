@@ -248,6 +248,19 @@ test("Body paragraphs are justified with hyphenation, while short UI text stays 
   assert.ok(/\.form-note,[\s\S]*?text-align:\s*left;/.test(css));
 });
 
+test("Toolkit icon is a CE4 monogram drawn from Inter Tight, not the CE marking", () => {
+  const svg = read("assets/images/toolkit-icon.svg");
+  const favicon = read("assets/images/favicon.svg");
+  assert.equal(svg, favicon, "the favicon should be the same artwork as the header icon");
+  assert.ok(!/<circle[^>]*stroke-width/.test(svg), "the icon must not wrap the letters in a ring");
+  assert.ok(
+    !/<text/i.test(svg),
+    "lettering is drawn as paths, so no font is required at render time"
+  );
+  assert.ok(svg.includes('color="#D3F781"'), "the 4 should use the brand lime");
+  assert.ok(svg.includes('fill="#044953"'), "the tile should use the brand teal");
+});
+
 test("Toolkit icon is separate from the official CSID Network footer logo", () => {
   for (const f of [
     "index.html",

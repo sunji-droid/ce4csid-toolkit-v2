@@ -9,8 +9,11 @@ Used here:
 - `logo.svg`: primary full lockup, brand teal. Retained for documents and reference.
 - `logo-white.svg`: full lockup, neutral white. Used in the footer support line.
 - `csid-logo-mix.png`, `csid-logo-teal.png`: raster copies used for documents.
-- `toolkit-icon.svg`, `toolkit-icon.png`: separate CE4CSID Toolkit product icon. Used in the
-  site header, footer brand block, favicon, apple touch icon, and share image.
+- `toolkit-icon.svg`, `toolkit-icon.png`: separate CE4CSID Toolkit product icon. A CE4 monogram
+  drawn from Inter Tight with the 4 in brand lime, stored as vector paths so it needs no font at
+  render time. Used in the site header, footer brand block, favicon, apple touch icon, and share
+  image. It deliberately has no enclosing ring, because a circled CE is the EU CE conformity
+  marking.
 - `favicon.svg`: copy of the toolkit icon for the browser tab.
 - `apple-touch-icon.png`: toolkit icon raster for touch devices.
 - `og-image.png`: share image with the toolkit icon and the footer support line.
