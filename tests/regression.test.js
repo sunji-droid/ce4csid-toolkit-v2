@@ -248,6 +248,23 @@ test("Body paragraphs are justified with hyphenation, while short UI text stays 
   assert.ok(/\.form-note,[\s\S]*?text-align:\s*left;/.test(css));
 });
 
+test("Toolkit icon carries the lime question mark and stays large enough to read", () => {
+  const css = read("assets/css/style.css");
+  const rule = /\.toolkit-icon\s*\{[^}]*width:\s*(\d+)px/s.exec(css);
+  assert.ok(rule, "the toolkit icon should have an explicit width");
+  assert.ok(Number(rule[1]) >= 48, "header icon should be at least 48 px, got " + rule[1]);
+  const footer = /\.site-footer \.toolkit-icon\s*\{[^}]*width:\s*(\d+)px/s.exec(css);
+  assert.ok(footer && Number(footer[1]) >= 56, "footer icon should be at least 56 px");
+  const svg = read("assets/images/toolkit-icon.svg");
+  const lime = (svg.match(/color="#D3F781"/g) || []).length;
+  assert.ok(lime >= 2, "the 4 and the question mark should both be lime, found " + lime);
+  const footerHtml = read("index.html");
+  assert.ok(
+    footerHtml.includes("assets/images/toolkit-icon-lime.svg"),
+    "the footer should use the lime tile so the mark reads on the dark footer"
+  );
+});
+
 test("Toolkit icon is a CE4 monogram drawn from Inter Tight, not the CE marking", () => {
   const svg = read("assets/images/toolkit-icon.svg");
   const favicon = read("assets/images/favicon.svg");

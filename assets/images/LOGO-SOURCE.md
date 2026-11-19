@@ -13,7 +13,7 @@ Used here:
   drawn from Inter Tight with the 4 in brand lime, stored as vector paths so it needs no font at
   render time. Used in the site header, footer brand block, favicon, apple touch icon, and share
   image. It deliberately has no enclosing ring, because a circled CE is the EU CE conformity
-  marking.
+  marking. A tilted question mark in lime sits after the 4, at the Working Group's request.
 - `favicon.svg`: copy of the toolkit icon for the browser tab.
 - `apple-touch-icon.png`: toolkit icon raster for touch devices.
 - `og-image.png`: share image with the toolkit icon and the footer support line.

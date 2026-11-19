@@ -317,26 +317,27 @@ a.card:hover {
 }
 .toolkit-icon {
   display: block;
-  width: 42px;
-  height: 42px;
+  width: 56px;
+  height: 56px;
   flex: none;
-  border-radius: 12px;
+  border-radius: 15px;
 }
 .site-footer .brand-logo {
   height: 44px;
 }
 .site-footer .toolkit-icon {
-  width: 44px;
-  height: 44px;
+  width: 64px;
+  height: 64px;
+  border-radius: 17px;
 }
 @media (max-width: 640px) {
   .brand-logo {
     height: 30px;
   }
   .toolkit-icon {
-    width: 34px;
-    height: 34px;
-    border-radius: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 11px;
   }
   .brand-text span {
     display: none;
