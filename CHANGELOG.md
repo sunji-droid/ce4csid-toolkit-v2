@@ -1,5 +1,15 @@
 # Changelog
 
+## v2.1.4 - 2026-11-19
+
+### Changed
+
+- Toolkit icon enlarged: 56 px in the header, 64 px in the footer brand block, and 40 px on small
+  screens, so the CE4 monogram reads clearly at a glance.
+- Added the tilted question mark from the Working Group's review, in brand lime, after the 4. It is
+  drawn from Inter Tight like the rest of the mark, and shares the tile with no extra elements so it
+  survives the browser tab size.
+
 ## v2.1.3 - 2026-11-18
 
 ### Changed

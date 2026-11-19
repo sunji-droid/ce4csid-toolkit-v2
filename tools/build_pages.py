@@ -15,6 +15,7 @@ REPO = "https://github.com/sunji-droid/ce4csid-toolkit-v2"
 # The official CSID Network artwork is used only in the footer support line.
 # See assets/images/LOGO-SOURCE.md. Do not recolour or redraw the globe mark.
 TOOLKIT_ICON = '''<img class="toolkit-icon" src="assets/images/toolkit-icon.svg" alt="CE4CSID Toolkit icon" width="512" height="512">'''
+TOOLKIT_ICON_LIME = '''<img class="toolkit-icon" src="assets/images/toolkit-icon-lime.svg" alt="CE4CSID Toolkit icon" width="512" height="512">'''
 LOGO_FOOTER = '''<img class="brand-logo" src="assets/images/logo-white.svg" alt="CSID Network logo" width="760" height="212">'''
 
 NAV = [
@@ -89,7 +90,7 @@ FOOTER = f'''<footer class="site-footer" role="contentinfo">
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="index.html" class="brand" aria-label="CE4CSID Community Engagement Toolkit home">
-          {TOOLKIT_ICON}
+          {TOOLKIT_ICON_LIME}
           <span class="brand-text">CE4CSID<span>Community Engagement Toolkit</span></span>
         </a>
         <p>Practical resources and guidance for integrating community engagement into Climate Sensitive Infectious Disease research, developed by the CE4CSID Working Group.</p>
