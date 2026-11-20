@@ -1,6 +1,7 @@
 // @ts-check
 /**
- * Community Engagement Checklist content: five stages, twenty actions.
+ * Community Engagement Checklist content, from the CE4CSID Working Group document:
+ * eight stages, forty two actions, wording taken from the source checklist.
  * Kept separate from behaviour so it can be tested and reused.
  */
 
@@ -22,142 +23,270 @@
 /** @type {Stage[]} */
 export const STAGES = [
   {
-    id: "design",
-    title: "Project Design",
-    description: "Lay the foundation for engagement before fieldwork or study design is finalised.",
-    items: [
-      {
-        id: "design_scope",
-        label: "Define the CSID issue and geographic scope in plain, non technical language",
-        desc: "Write a short summary of the research question that a community member with no scientific background could understand and react to.",
-      },
-      {
-        id: "design_intent",
-        label: "State why community engagement is needed for this specific project",
-        desc: "Be explicit about what engagement is expected to change, inform, or improve, rather than treating it as a formality.",
-      },
-      {
-        id: "design_budget",
-        label: "Set aside a dedicated budget and timeline for engagement activities",
-        desc: "Engagement done at the last minute, with no funding of its own, is the most common cause of tokenistic involvement.",
-      },
-      {
-        id: "design_risks",
-        label: "Identify risks of excluding affected communities from early design decisions",
-        desc: "Consider reputational, ethical, and scientific risks, including blind spots the research team may not see on its own.",
-      },
-    ],
-  },
-  {
-    id: "stakeholders",
-    title: "Stakeholder Identification",
-    description: "Map who is affected, who represents them, and who holds influence or trust.",
-    items: [
-      {
-        id: "stake_map",
-        label:
-          "Create a stakeholder map covering directly affected residents, local leaders, and service providers",
-        desc: "Go beyond formal leadership structures. Include informal community networks, youth groups, and marginalised voices.",
-      },
-      {
-        id: "stake_gatekeepers",
-        label: "Identify legitimate community gatekeepers and entry points",
-        desc: "Confirm the correct protocol for approaching a community, including any traditional or local government authorities that expect to be consulted first.",
-      },
-      {
-        id: "stake_vulnerable",
-        label: "Flag groups at heightened CSID risk who are often underrepresented",
-        desc: "For example, informal settlement residents, outdoor workers, subsistence farmers, or people with limited access to health services.",
-      },
-      {
-        id: "stake_conflicts",
-        label:
-          "Note any existing tensions or history between the community and past research or health projects",
-        desc: "Past negative experiences with researchers or government programmes will shape how the community responds to this project.",
-      },
-    ],
-  },
-  {
-    id: "planning",
-    title: "Engagement Planning",
-    description: "Decide how, when, and through which channels engagement will actually happen.",
-    items: [
-      {
-        id: "plan_methods",
-        label: "Select engagement methods appropriate to the context",
-        desc: "Consider community meetings, household visits, radio, local language materials, or existing community structures such as health committees.",
-      },
-      {
-        id: "plan_schedule",
-        label: "Build an engagement schedule aligned with the research timeline",
-        desc: "Include time for community feedback to actually influence decisions, not only for announcing decisions already made.",
-      },
-      {
-        id: "plan_consent",
-        label:
-          "Prepare consent and information materials in the language and literacy level of the community",
-        desc: "Materials should explain the CSID issue, what participation involves, and how data will be used and protected.",
-      },
-      {
-        id: "plan_feedbackloop",
-        label: "Design a clear feedback loop for how community input will be recorded and acted on",
-        desc: "Decide in advance who is responsible for reviewing community input and how decisions arising from it will be communicated back.",
-      },
-    ],
-  },
-  {
-    id: "implementation",
-    title: "Implementation",
+    id: "identify",
+    title: "Community Identification and Contextual Understanding",
     description:
-      "Carry out engagement activities and keep the relationship active throughout the project.",
+      "Establish who the community is, how it is organised, and what shapes everyday life there before any engagement begins.",
     items: [
       {
-        id: "impl_intro",
-        label: "Hold an initial community introduction session before data collection begins",
-        desc: "Use this session to explain the project, answer questions honestly, and confirm community willingness to proceed.",
+        id: "identify_target",
+        label: "Identify the target community",
+        desc: "Name the community you intend to work with, and be able to say why that definition is the right one rather than the convenient one.",
       },
       {
-        id: "impl_training",
-        label: "Brief all field staff on engagement protocols and cultural expectations",
-        desc: "Everyone representing the project in the field should be able to explain the study and engagement process consistently.",
+        id: "identify_stakeholders",
+        label: "Identify key stakeholders, marginalised populations and vulnerable groups",
+        desc: "Map who holds influence, who is usually consulted, and who is usually missed out, including groups whose needs are easy to overlook.",
       },
       {
-        id: "impl_records",
-        label: "Keep a running record of engagement activities, attendance, and issues raised",
-        desc: "This record supports accountability and provides evidence for the evaluation stage.",
+        id: "identify_mapping",
+        label: "Conduct preliminary geographical mapping",
+        desc: "Understand the community's location, resources, infrastructure and accessibility, including how people actually travel to reach services.",
       },
       {
-        id: "impl_grievance",
-        label: "Set up a simple channel for community members to raise concerns during the project",
-        desc: "This can be as simple as a named contact person and phone number shared at every engagement activity.",
+        id: "identify_governance",
+        label: "Identify governance structures, leadership and preferred communication channels",
+        desc: "Find out who speaks for the community, and how information genuinely travels, rather than assuming a notice board or radio reaches everyone.",
+      },
+      {
+        id: "identify_diversity",
+        label:
+          "Consider gender, disability, accessibility, socioeconomic diversity and cultural practices",
+        desc: "Note how these shape participation, and what would need to change for the engagement to include people who are usually excluded.",
       },
     ],
   },
   {
-    id: "evaluation",
-    title: "Feedback and Evaluation",
-    description: "Close the loop with the community and capture lessons for future CSID work.",
+    id: "consult",
+    title: "Initial Community Consultation and Problem Identification",
+    description:
+      "Approach the community properly, agree how you will work together, and let the community help define the problem.",
     items: [
       {
-        id: "eval_share",
-        label: "Share findings back with the community in accessible, non technical form",
-        desc: "Consider a short community meeting, a plain language summary, or a local radio segment ahead of, or alongside, any academic publication.",
+        id: "consult_permission",
+        label: "Approach community leaders and stakeholders and obtain permission to begin",
+        desc: "Ask before you arrive. Document who granted permission and on what basis, so the record matches the practice.",
       },
       {
-        id: "eval_input",
-        label: "Collect community feedback on the engagement process itself",
-        desc: "Ask what worked, what felt excluded, and what should be done differently next time.",
-      },
-      {
-        id: "eval_lessons",
-        label: "Document lessons learned for future CSID engagement work",
-        desc: "Add these lessons to internal guidance so the next project team does not start from zero.",
-      },
-      {
-        id: "eval_continuity",
+        id: "consult_indigenous",
         label:
-          "Agree on how the relationship with the community will continue after the project ends",
-        desc: "Communities frequently host repeated research. Ending well protects trust for future engagement.",
+          "Invite collaboration with Indigenous peoples and other community groups where relevant",
+        desc: "Partnership, not consultation. Agree what the community gains from taking part before asking for their time.",
+      },
+      {
+        id: "consult_concerns",
+        label:
+          "Consult community representatives on their preliminary CSID concerns and priorities",
+        desc: "Ask open questions and record the answers in their words, not translated into your own framing too early.",
+      },
+      {
+        id: "consult_problem",
+        label: "Jointly identify a CSID problem or research priority relevant to the community",
+        desc: "The priority should be recognisable to the community as theirs, not a research question with community participation attached.",
+      },
+    ],
+  },
+  {
+    id: "design",
+    title: "Participatory Research and Engagement Design",
+    description:
+      "Design the work with the community, with roles, ethics and communication agreed in advance.",
+    items: [
+      {
+        id: "design_framework",
+        label: "Develop a community engagement plan guided by a participatory framework",
+        desc: "Choose an approach you can explain in plain language, and say how it shapes the decisions you will make.",
+      },
+      {
+        id: "design_needs",
+        label: "Design a participatory needs assessment with community input",
+        desc: "Communities should help shape the questions, not only answer them.",
+      },
+      {
+        id: "design_roles",
+        label:
+          "Define the roles and responsibilities of researchers, community representatives and partners",
+        desc: "Write down who decides what, and what happens when the two sides disagree.",
+      },
+      {
+        id: "design_ethics",
+        label: "Build in consent, privacy, safeguarding and responsible data usage",
+        desc: "These belong in the design, not in the ethics application after the design is finished.",
+      },
+      {
+        id: "design_inclusion",
+        label: "Establish inclusive approaches to participation and decision making",
+        desc: "Say how quieter voices reach the table, and how decisions are recorded so they can be checked later.",
+      },
+      {
+        id: "design_dissemination",
+        label: "Draft a preliminary strategy for communicating findings in appropriate formats",
+        desc: "Decide early how results will come back to the community, in what language and through which channel.",
+      },
+    ],
+  },
+  {
+    id: "approvals",
+    title: "Ethical and Institutional Approvals",
+    description:
+      "Secure the approvals, permits and consent procedures the work requires, and keep them current.",
+    items: [
+      {
+        id: "approvals_ethics",
+        label: "Obtain ethical approval from the relevant committees or institutions",
+        desc: "Check the approved version matches what you will actually do, and amend it if the community changes the plan.",
+      },
+      {
+        id: "approvals_permits",
+        label: "Obtain additional permits, institutional authorisations or community permissions",
+        desc: "Requirements vary by country and district. Build in the time rather than discovering it late.",
+      },
+      {
+        id: "approvals_consent",
+        label: "Establish procedures for documenting informed consent and managing data securely",
+        desc: "Describe how consent is taken, recorded and withdrawn, and where the data is held.",
+      },
+    ],
+  },
+  {
+    id: "resources",
+    title: "Resource Planning and Implementation Preparation",
+    description: "Get the practical things in place, funded and tested before activities begin.",
+    items: [
+      {
+        id: "resources_workplan",
+        label: "Develop a detailed work plan with activities, milestones and a realistic timeline",
+        desc: "Use realistic timelines that account for community calendars, seasons and approval delays.",
+      },
+      {
+        id: "resources_budget",
+        label: "Prepare a budget covering activities, tools and accessibility requirements",
+        desc: "Include transport, accessibility, translation and community time. Unfunded engagement becomes token engagement.",
+      },
+      {
+        id: "resources_materials",
+        label: "Develop accessible materials with community input",
+        desc: "Participants are better judges of whether a document makes sense than the team that wrote it.",
+      },
+      {
+        id: "resources_language",
+        label: "Arrange interpretation, transcription and translation where necessary",
+        desc: "Check interpreters understand the technical terms, and agree how sensitive topics will be handled.",
+      },
+      {
+        id: "resources_logistics",
+        label: "Identify venues, transport, communication tools and accessibility arrangements",
+        desc: "Test the practicalities before the day. Accessible engagement is a logistics problem before it is a values problem.",
+      },
+      {
+        id: "resources_me",
+        label: "Establish a monitoring plan with indicators and feedback mechanisms",
+        desc: "Agree how you will know the engagement is working, and how the community can tell you when it is not.",
+      },
+    ],
+  },
+  {
+    id: "implement",
+    title: "Implementation and Community Engagement",
+    description: "Carry out the activities with the community, and respond to what happens.",
+    items: [
+      {
+        id: "implement_activities",
+        label: "Implement the planned activities in collaboration with community representatives",
+        desc: "Run them with the community rather than for them, including the parts that feel routine.",
+      },
+      {
+        id: "implement_needs",
+        label: "Conduct the needs assessment and refine activities using its findings",
+        desc: "Be willing to change the plan. Gathering findings and ignoring them damages trust.",
+      },
+      {
+        id: "implement_voluntary",
+        label:
+          "Ensure participation is voluntary, inclusive, accessible and culturally appropriate",
+        desc: "Check in practice, not only on paper. Watch who is in the room and who is not.",
+      },
+      {
+        id: "implement_feedback",
+        label: "Set up accessible ways to receive and respond to feedback and concerns",
+        desc: "Describe how concerns are acknowledged, handled and reported back, and who is accountable.",
+      },
+      {
+        id: "implement_document",
+        label: "Document activities and address emerging challenges, risks and ethical concerns",
+        desc: "Keep records good enough that someone else could continue the work.",
+      },
+    ],
+  },
+  {
+    id: "monitoring",
+    title: "Participatory Monitoring, Evaluation and Learning",
+    description:
+      "Review what happened with the community, and use what you learn to adjust the work.",
+    items: [
+      {
+        id: "monitoring_progress",
+        label:
+          "Monitor participation, inclusivity, activity delivery and progress against indicators",
+        desc: "Look at who has been reached and who has not, rather than only whether the activity happened.",
+      },
+      {
+        id: "monitoring_interpret",
+        label: "Involve community members in reviewing and interpreting findings",
+        desc: "Community interpretation catches misunderstandings the research team would otherwise repeat.",
+      },
+      {
+        id: "monitoring_evaluate",
+        label: "Evaluate whether the engagement met community needs and achieved its objectives",
+        desc: "Judge it against the objectives the community helped set, not only the ones written in the proposal.",
+      },
+      {
+        id: "monitoring_lessons",
+        label: "Document lessons learned, community feedback and recommendations",
+        desc: "Record them somewhere that outlasts the project and is findable by the next team.",
+      },
+      {
+        id: "monitoring_refine",
+        label: "Use the findings to refine the engagement approach",
+        desc: "Close the loop. Monitoring that changes nothing is administration.",
+      },
+    ],
+  },
+  {
+    id: "disseminate",
+    title: "Results Dissemination, Community Feedback and Sustainability",
+    description:
+      "Return the findings to the community, in their terms, and leave something that continues.",
+    items: [
+      {
+        id: "disseminate_findings",
+        label: "Disseminate research findings and outputs to the community in a timely manner",
+        desc: "Timely means while it still matters to them. A report two years late is an archived file.",
+      },
+      {
+        id: "disseminate_formats",
+        label: "Use channels, languages and formats tailored to the community's preferences",
+        desc: "Match how the community already shares information, rather than how the institution prefers to publish.",
+      },
+      {
+        id: "disseminate_discuss",
+        label: "Provide opportunities for the community to discuss, validate and respond",
+        desc: "Dissemination is a conversation with a right of reply, not an announcement.",
+      },
+      {
+        id: "disseminate_access",
+        label: "Make resulting resources, interventions and tools accessible to the community",
+        desc: "Where relevant and feasible, the outputs should be usable by the people who made the work possible.",
+      },
+      {
+        id: "disseminate_sustain",
+        label: "Identify opportunities for community ownership and continued partnerships",
+        desc: "Agree what continues after the funding ends, and who carries it.",
+      },
+      {
+        id: "disseminate_attribution",
+        label: "Communicate how community contributions and feedback influenced the research",
+        desc: "Say plainly what changed because of them. It is the clearest evidence that the engagement was real.",
       },
     ],
   },

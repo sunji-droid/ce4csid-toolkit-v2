@@ -67,7 +67,7 @@ test("parseBackup validates the app marker and item shape", () => {
 test("stageStats and overallStats compute completion correctly", () => {
   const items = {};
   items[STAGES[0].items[0].id] = { checked: true, note: "" };
-  assert.deepEqual(stageStats(STAGES[0], items), { total: 4, done: 1 });
+  assert.deepEqual(stageStats(STAGES[0], items), { total: 5, done: 1 });
   const all = overallStats(STAGES, items);
   assert.equal(all.total, ACTION_COUNT);
   assert.equal(all.done, 1);
