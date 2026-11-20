@@ -96,7 +96,7 @@ def card(w, h, out):
     d.line([pad, fy, w - pad, fy], fill=(*TEAL, 60), width=2)
     d.text(
         (pad, fy + int(h * 0.028)),
-        "The CE4CSID Toolkit, supported by the CSID Network",
+        "The CE4CSID Toolkit is supported by the CSIDNet.",
         font=font(BODY, int(h * 0.030), 600),
         fill=TEAL,
     )

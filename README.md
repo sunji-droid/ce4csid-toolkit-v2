@@ -142,7 +142,7 @@ The site header, footer brand block, favicon, apple touch icon, and share image 
 **CE4CSID Toolkit product icon**: a CE4 monogram drawn from Inter Tight, in brand teal and lime,
 with no enclosing ring because a circled CE is the EU conformity marking.
 The footer support line uses the **official CSID Network artwork** from the Identity Guidelines
-logo pack, with the line "The CE4CSID Toolkit, supported by the CSID Network". Provenance and
+logo pack, with the line "The CE4CSID Toolkit is supported by the CSIDNet.". Provenance and
 brand rules are recorded in `assets/images/LOGO-SOURCE.md`.
 
 Per the style guide, do not recolour the CSID Network globe icon with other brand colours; use
