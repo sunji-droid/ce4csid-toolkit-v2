@@ -1,7 +1,7 @@
 // @ts-check
 /**
  * Community Engagement Checklist.
- * Five stages, twenty actions. Progress + notes + project name persist in
+ * Eight stages, forty two actions. Progress + notes + project name persist in
  * localStorage. Includes expand/collapse all, JSON backup export/import,
  * a project name on the printed record, and a completion celebration.
  */
@@ -32,7 +32,7 @@ import { esc, isRecord, on, showToast } from "./util.js";
  * @property {(id: string, note: string) => void} onNote
  */
 
-export const STORAGE_KEY = "ce4csid_checklist_v2";
+export const STORAGE_KEY = "ce4csid_checklist_v3";
 export const BACKUP_APP = "ce4csid-community-engagement-checklist";
 
 /** @returns {ChecklistState} */

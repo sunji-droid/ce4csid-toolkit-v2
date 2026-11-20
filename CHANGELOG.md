@@ -1,5 +1,17 @@
 # Changelog
 
+## v2.1.7 - 2026-11-20
+
+### Changed
+
+- Checklist content replaced with the Working Group's eight-stage checklist: forty actions across
+  community identification, consultation, participatory design, approvals, resource planning,
+  implementation, participatory monitoring, and results dissemination. Wording follows the source
+  document, with a short practical note under each action.
+- Saved progress key moved to `ce4csid_checklist_v3`, so a checklist started under the old five
+  stage structure cannot be mismatched against the new action IDs.
+- Checklist page lede updated to describe eight stages.
+
 ## v2.1.5 - 2026-11-20
 
 ### Changed
