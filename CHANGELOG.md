@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.1.8 - 2026-11-20
+
+### Changed
+
+- Checklist actions now use the Working Group's own question wording, unchanged, rather than a
+  shortened version of it. All forty questions are as written in the source document, each with a
+  short practical note underneath.
+
 ## v2.1.7 - 2026-11-20
 
 ### Changed
