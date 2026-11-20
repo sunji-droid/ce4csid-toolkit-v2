@@ -115,7 +115,7 @@ FOOTER = f'''<footer class="site-footer" role="contentinfo">
     </div>
     <div class="footer-support">
       {LOGO_FOOTER}
-      <p>The CE4CSID Toolkit, supported by the CSID Network</p>
+      <p>The CE4CSID Toolkit is supported by the CSIDNet.</p>
     </div>
     <div class="footer-bottom">
       <span>&copy; <span data-current-year>2026</span> CSID Network / CE4CSID Working Group.</span>

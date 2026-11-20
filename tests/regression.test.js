@@ -256,8 +256,12 @@ test("Toolkit icon carries the lime question mark and stays large enough to read
   const footer = /\.site-footer \.toolkit-icon\s*\{[^}]*width:\s*(\d+)px/s.exec(css);
   assert.ok(footer && Number(footer[1]) >= 56, "footer icon should be at least 56 px");
   const svg = read("assets/images/toolkit-icon.svg");
-  const lime = (svg.match(/color="#D3F781"/g) || []).length;
+  const lime = (svg.match(/#D3F781/gi) || []).length;
   assert.ok(lime >= 2, "the 4 and the question mark should both be lime, found " + lime);
+  assert.ok(
+    /rotate\(16 50 70\)/.test(svg),
+    "the drawn question mark should be tilted rather than set straight"
+  );
   const footerHtml = read("index.html");
   assert.ok(
     footerHtml.includes("assets/images/toolkit-icon-lime.svg"),
@@ -295,7 +299,7 @@ test("Toolkit icon is separate from the official CSID Network footer logo", () =
     );
     assert.ok(html.includes('alt="CE4CSID Toolkit icon"'), f + " should label the toolkit icon");
     assert.ok(
-      html.includes("The CE4CSID Toolkit, supported by the CSID Network"),
+      html.includes("The CE4CSID Toolkit is supported by the CSIDNet."),
       f + " should carry the footer support line"
     );
     assert.ok(

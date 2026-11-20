@@ -1,5 +1,18 @@
 # Changelog
 
+## v2.1.5 - 2026-11-20
+
+### Changed
+
+- Toolkit icon: the question mark is now drawn as a pen stroke rather than set from the typeface.
+  The hook, stem and dot come from a single tapered outline with a slightly irregular dot, tilted
+  16 degrees, so it reads as something sketched onto the wordmark rather than a glyph placed beside
+  it. Chosen by the Working Group from four drawn options.
+- Toolkit icon artwork is centred on its own ink box, so the tile no longer reads top heavy with an
+  empty lower half.
+- Footer support line reads "The CE4CSID Toolkit is supported by the CSIDNet." at the Working
+  Group's request. Applied to all seven pages and the share images.
+
 ## v2.1.4 - 2026-11-19
 
 ### Changed
